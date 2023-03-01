@@ -38,16 +38,17 @@ function resolvePromises() {
   console.log(allRooms)
   console.log(allBookings)
   });
-  // .then(() => {
-  //   hotelRepo = new Hotel(allBookings)
-  //   displayBookings(hotelRepo)
-  //   setCustomer(allCustomers)
-  // })
+  .then(() => {
+    hotelRepo = new Hotel(allBookings)
+    setCustomer(allCustomers)
+    displayBookings(hotelRepo)
+  })
 };
 
 function displayBookings() {
   bookingSection.innerHTML = ''
-  
+  //match my randomCustomer to the bookings they have made and display those
+  //bookings and the cost
 }
 
 
