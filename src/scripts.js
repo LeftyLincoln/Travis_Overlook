@@ -7,24 +7,36 @@ import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
-
+import Customer from "./classes/Customer";
+import Rooms from "./classes/Rooms"
+import Hotel from "./classes/Hotel"
+import fetchPromises from "./apiCalls"
 // Query Selectors
 
 
+
 // Global Variables
-let allCustomers
-let allRooms
-let allBookings
+let allCustomers;
+let allRooms;
+let allBookings;
+
 
 // Event Listeners
-
-
+window.addEventListener("load", () => {
+  resolvePromises();
+});
 
 // Functions
 
-// function resolvePromises() {
-//   fetchPromises()
-//   allCustomers = data[0].map((customer) => new Customer(customer))
-//   allRooms = data[1].map((rooms) => new Rooms(rooms))
-//   allBookings = data[2].map((Bookings) => new Bookings(bookings))
-// }
+function resolvePromises() {
+  fetchPromises()
+  .then((data) => {
+  allCustomers = data[0].customers.map((customer) => new Customer(customer))
+  allRooms = data[1].rooms.map((room) => new Rooms(room))
+  allBookings = data[2].bookings.map(booking => booking)
+  });
+  .then(() => {
+    hotelRepo = new Hotel(allBookings)
+  })
+};
+
