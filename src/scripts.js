@@ -8,4 +8,23 @@ import './css/styles.css';
 import './images/turing-logo.png'
 
 
-console.log('This is the JavaScript entry file - your code begins here.');
+// Query Selectors
+
+
+// Global Variables
+let allCustomers
+let allRooms
+let allBookings
+
+// Event Listeners
+
+
+
+// Functions
+
+// function resolvePromises() {
+//   fetchPromises()
+//   allCustomers = data[0].map((customer) => new Customer(customer))
+//   allRooms = data[1].map((rooms) => new Rooms(rooms))
+//   allBookings = data[2].map((Bookings) => new Bookings(bookings))
+// }
