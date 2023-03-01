@@ -12,7 +12,7 @@ import Rooms from "./classes/Rooms"
 import Hotel from "./classes/Hotel"
 import fetchPromises from "./apiCalls"
 // Query Selectors
-
+const bookingSection = document.querySelector('booking-section')
 
 
 // Global Variables
@@ -34,9 +34,25 @@ function resolvePromises() {
   allCustomers = data[0].customers.map((customer) => new Customer(customer))
   allRooms = data[1].rooms.map((room) => new Rooms(room))
   allBookings = data[2].bookings.map(booking => booking)
+  console.log(allCustomers)
+  console.log(allRooms)
+  console.log(allBookings)
   });
-  .then(() => {
-    hotelRepo = new Hotel(allBookings)
-  })
+  // .then(() => {
+  //   hotelRepo = new Hotel(allBookings)
+  //   displayBookings(hotelRepo)
+  //   setCustomer(allCustomers)
+  // })
 };
 
+function displayBookings() {
+  bookingSection.innerHTML = ''
+  
+}
+
+
+function setCustomer(arr) {
+  let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];
+  randomCustomer = new Customer(randomUserIndex);
+  console.log('Random Customer', randomCustomer);
+}
