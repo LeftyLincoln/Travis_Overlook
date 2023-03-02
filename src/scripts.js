@@ -20,6 +20,7 @@ let allCustomers;
 let allRooms;
 let allBookings;
 let hotelRepo;
+let randomCustomer;
 
 // Event Listeners
 window.addEventListener("load", () => {
@@ -39,23 +40,26 @@ function resolvePromises() {
   console.log(allBookings)
   })
   .then(() => {
-    hotelRepo = new Hotel(allBookings)
+    hotelRepo = new Hotel(allBookings, allRooms)
     console.log(hotelRepo)
+    setCustomer(allCustomers)
+    displayBookings()
 })
-  //   setCustomer(allCustomers)
-  //   displayBookings(hotelRepo)
-  // })
+    
 };
 
 function displayBookings() {
-  bookingSection.innerHTML = ''
+  // bookingSection.innerHTML = ''
   //match my randomCustomer to the bookings they have made and display those
   //bookings and the cost
+  randomCustomer.showBookings(allBookings)
+  // console.log(randomCustomer)
+  randomCustomer.showAmountSpent(allRooms)
+  console.log(randomCustomer)
 }
 
 
 function setCustomer(arr) {
   let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];
-  randomCustomer = new Customer(randomUserIndex);
-  console.log('Random Customer', randomCustomer);
+  randomCustomer = new Customer(randomCustomerIndex);
 }
