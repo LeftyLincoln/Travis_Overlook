@@ -12,7 +12,7 @@ import Rooms from "./classes/Rooms"
 import Hotel from "./classes/Hotel"
 import fetchPromises from "./apiCalls"
 // Query Selectors
-const bookingSection = document.querySelector('booking-section')
+const bookingSection = document.querySelector('.booking-section')
 
 
 // Global Variables
@@ -43,21 +43,34 @@ function resolvePromises() {
     hotelRepo = new Hotel(allBookings, allRooms)
     console.log(hotelRepo)
     setCustomer(allCustomers)
-    displayBookings()
+    displayBookings(allBookings)
+    displayAmountSpent()
 })
     
 };
 
-function displayBookings() {
-  // bookingSection.innerHTML = ''
-  //match my randomCustomer to the bookings they have made and display those
-  //bookings and the cost
-  randomCustomer.showBookings(allBookings)
-  // console.log(randomCustomer)
+function displayBookings(allBookings) {
+setCustomer(allCustomers)
+const singleCustomer = randomCustomer.showBookings(allBookings)  
+console.log(singleCustomer)
+bookingSection.innerHTML = ''
+
+singleCustomer.forEach(booking => {
+    bookingSection.innerHTML += `
+      <div class='booking-card'>
+        <button class='booking-id' id='${booking.id}'>${booking.id}</button>
+        <button class='booking-id' id='${booking.userID}'>${booking.userID}</button>
+        <button class='booking-id' id='${booking.date}'>${booking.date}</button>
+        <button class='booking-id' id='${booking.roomNumber}'>${booking.roomNumber}</button>
+      </div>
+    `
+  })  
+}
+
+function displayAmountSpent() {
   randomCustomer.showAmountSpent(allRooms)
   console.log(randomCustomer)
 }
-
 
 function setCustomer(arr) {
   let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];

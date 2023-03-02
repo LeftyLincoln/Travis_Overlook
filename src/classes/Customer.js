@@ -2,16 +2,16 @@ class Customer {
   constructor(customer) {
     this.id = customer.id;
     this.name = customer.name;
-    this.bookings = []
+    this.bookings
     
   }
 
   showBookings(allBookings) {
-    this.bookings = allBookings.filter(booking => this.id === booking.userID)
+     this.bookings =  allBookings.filter(booking => this.id === booking.userID)
   }
 
   showAmountSpent(allRooms) {
-    this.bookings.reduce((acc, booking) => {
+   return this.bookings.reduce((acc, booking) => {
     allRooms.forEach(room => {
       if(room.number === booking.roomNumber) {
         acc += room.costPerNight
@@ -19,8 +19,7 @@ class Customer {
       }
     }) 
       return acc
-    }, 0)
-    
+    }, 0) 
   }
 
 }
