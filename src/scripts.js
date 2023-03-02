@@ -19,7 +19,7 @@ const bookingSection = document.querySelector('booking-section')
 let allCustomers;
 let allRooms;
 let allBookings;
-
+let hotelRepo;
 
 // Event Listeners
 window.addEventListener("load", () => {
@@ -37,12 +37,14 @@ function resolvePromises() {
   console.log(allCustomers)
   console.log(allRooms)
   console.log(allBookings)
-  });
+  })
   .then(() => {
     hotelRepo = new Hotel(allBookings)
-    setCustomer(allCustomers)
-    displayBookings(hotelRepo)
-  })
+    console.log(hotelRepo)
+})
+  //   setCustomer(allCustomers)
+  //   displayBookings(hotelRepo)
+  // })
 };
 
 function displayBookings() {
