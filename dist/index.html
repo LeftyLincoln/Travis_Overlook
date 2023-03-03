@@ -10,24 +10,26 @@
 <body>
   <aside>
     <h2>Pick Your Day to Stay</h2>
-    <button>Login</button>
-    <button>Book A Room with Us</button>
-    <button>Check Your Bookings</button>
     <input type="date" id="date" min="2022-01-01" max="2023-12-31">
+    <button class="show-rooms-button">Show Available Rooms By Date</button>
     <select name="Type of Room" id="type-of-room">
+      <option value="" selected disabled>Pick One</option>
       <option value="residential-suite">Residential Suite</option>
       <option value="suite">Suite</option>
       <option value="single-room">Single Room</option>
       <option value="junior-suite">Junior Suite</option>
     </select>
+    <button class="filter-rooms-button">Filter by Room Type</button>
   </aside>
   <main>
     <section class="top-section">
       <h1>Welcome to Atlantis</h1>
       <section class="amount-spent-section"></section>
     </section>
-    <section class="available-section hidden"></section>
-    <section class="booking-section"></section>
+    <section class="bottom-section">
+      <section class="available-section"></section>
+      <section class="booking-section"></section>
+    </section>
   </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>

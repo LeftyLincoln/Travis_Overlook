@@ -44,3 +44,12 @@ h1, h2 {
 .hidden {
   display: none;
 }
+
+.room-id {
+  padding:5px
+}
+
+.bottom-section {
+  display: flex;
+  justify-content: space-between;
+}
