@@ -58,15 +58,14 @@ function resolvePromises() {
 };
 
 function displayBookings(customerBookings) {
-bookingSection.innerHTML = ''
-customerBookings.forEach(booking => {
+const sorted = customerBookings.sort()
+bookingSection.innerHTML = 'Your reservations:'
+sorted.forEach(booking => {
     bookingSection.innerHTML += `
       <div class='booking-card'>
-        <button class='booking-id' id='${booking.id}'>${booking.id}</button>
-        <button class='booking-id' id='${booking.userID}'>${booking.userID}</button>
-        <button class='booking-id' id='${booking.date}'>${booking.date}</button>
-        <button class='booking-id' id='${booking.roomNumber}'>${booking.roomNumber}</button>
-      </div>
+        <p class='booking-id' id='${booking.date}'>On ${booking.date} you booked room ${booking.roomNumber}
+        </p>
+        </div>
     `
   })  
 }
@@ -92,14 +91,13 @@ function showRooms () {
   console.log(datePicked)
   console.log(hotelRepo.availableRooms)
   
-  showAvailableSection.innerHTML = 'Here are our available rooms'
+  showAvailableSection.innerHTML = 'Here are our available rooms for you:'
   rooms.forEach(room =>  {
   showAvailableSection.innerHTML += `
     <div class='room-card'>
-      <button class='room-id' id='${room.number}'>Room ${room.number}</button>
-      <button class='room-id' id='${room.roomType}'>is a ${room.roomType}</button>
-      <button class='room-id' id='${room.bedSize}'>with ${room.numBeds} ${room.bedSize} bed</button>
-      <button class='room-id' id='${room.costPerNight}'>The total Cost is $${room.costPerNight}</button>
+      <p class='room-id' id='${room.number}'>Room ${room.number} is a ${room.roomType}<br>
+      with ${room.numBeds} ${room.bedSize} bed and costs $${room.costPerNight} per night
+      </p>
     </div>
   `
   })

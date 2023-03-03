@@ -6,7 +6,6 @@ class Hotel {
   }
 
   findAvailableRooms(date) {
-    console.log(date)
     let noRoomAvailable = this.bookings.reduce((acc, booking) => {
       if(booking.date === date) {
         acc.push(booking.roomNumber)
@@ -23,11 +22,6 @@ class Hotel {
 
     return this.availableRooms
   }
-
-
-
-
-
 
   // addABooking(userID, date, roomNumber) {
 
