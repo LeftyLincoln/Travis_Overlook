@@ -1,3 +1,18 @@
+const testCustomers = [
+  {
+    "id": 1,
+    "name": "Leatha Ullrich"
+  },
+  {
+    "id": 2,
+    "name": "Rocio Schuster"
+  },
+  {
+    "id": 3,
+    "name": "Kelvin Schiller"
+  }
+]
+
 const bookings = [
   {
     "id": "5fwrgu4i7k55hl6sz",
@@ -45,3 +60,6 @@ const rooms = [
     "costPerNight": 491.14
   },
 ]
+
+
+export default {testCustomers, bookings, rooms};
