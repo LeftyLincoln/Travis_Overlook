@@ -11,9 +11,15 @@ import Customer from "./classes/Customer";
 import Rooms from "./classes/Rooms"
 import Hotel from "./classes/Hotel"
 import fetchPromises from "./apiCalls"
+
+
 // Query Selectors
 const bookingSection = document.querySelector('.booking-section')
 const amountSpentSection = document.querySelector('.amount-spent-section')
+const showAvailableRooms = document.querySelector('.show-rooms-button')
+const showAvailableSection = document.querySelector('.available-section')
+const dateChosen = document.getElementById('date')
+
 
 // Global Variables
 let allCustomers;
@@ -27,6 +33,9 @@ window.addEventListener("load", () => {
   resolvePromises();
 });
 
+showAvailableRooms.addEventListener('click', showRooms)
+
+
 // Functions
 
 function resolvePromises() {
@@ -39,7 +48,6 @@ function resolvePromises() {
   })
   .then(() => {
     hotelRepo = new Hotel(allBookings, allRooms)
-    // console.log(hotelRepo)
     setCustomer(allCustomers)
     randomCustomer.showBookings(allBookings)
     displayBookings(randomCustomer.bookings)
@@ -74,4 +82,25 @@ function setCustomer(arr) {
 
   // let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];
   // randomCustomer = new Customer(randomCustomerIndex);
+}
+
+function showRooms () {
+ 
+  const datePicked = dateChosen.value.replaceAll('-', '/')
+  let rooms = hotelRepo.findAvailableRooms(datePicked)
+
+  console.log(datePicked)
+  console.log(hotelRepo.availableRooms)
+  
+  showAvailableSection.innerHTML = 'Here are our available rooms'
+  rooms.forEach(room =>  {
+  showAvailableSection.innerHTML += `
+    <div class='room-card'>
+      <button class='room-id' id='${room.number}'>Room ${room.number}</button>
+      <button class='room-id' id='${room.roomType}'>is a ${room.roomType}</button>
+      <button class='room-id' id='${room.bedSize}'>with ${room.numBeds} ${room.bedSize} bed</button>
+      <button class='room-id' id='${room.costPerNight}'>The total Cost is $${room.costPerNight}</button>
+    </div>
+  `
+  })
 }
