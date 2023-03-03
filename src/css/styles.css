@@ -29,7 +29,7 @@ h1, h2 {
   flex-direction: column;
   flex-wrap:wrap;
   height: 95vh;
-  align-content: flex-start;
+  align-content: flex-end;
 }
 
 .booking-card {
@@ -37,6 +37,10 @@ h1, h2 {
   /* border: 2px solid red; */
   padding: 2px;
   /* width: 30vw */
-  align-items: flex-start;
+  align-items: flex-end;
   flex-direction: row;
+}
+
+.hidden {
+  display: none;
 }
