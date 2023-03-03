@@ -66,7 +66,7 @@ customerBookings.forEach(booking => {
 }
 
 function displayAmountSpent() {
-  amountSpentSection.innerHTML = `$${randomCustomer.showAmountSpent(allRooms).toFixed(2)}`
+  amountSpentSection.innerHTML = `Total Amount Spent at the Atlantis: $${randomCustomer.showAmountSpent(allRooms).toFixed(2)}`
 }
 
 
