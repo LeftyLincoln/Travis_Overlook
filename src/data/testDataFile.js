@@ -51,14 +51,6 @@ const testRooms = [
     "numBeds": 1,
     "costPerNight": 200.39
   },
-  {
-    "number": 20,
-    "roomType": "residential suite",
-    "bidet": false,
-    "bedSize": "queen",
-    "numBeds": 1,
-    "costPerNight": 343.95
-  },
 ]
 
 
