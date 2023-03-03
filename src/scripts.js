@@ -13,7 +13,7 @@ import Hotel from "./classes/Hotel"
 import fetchPromises from "./apiCalls"
 // Query Selectors
 const bookingSection = document.querySelector('.booking-section')
-
+const amountSpentSection = document.querySelector('.amount-spent-section')
 
 // Global Variables
 let allCustomers;
@@ -43,18 +43,17 @@ function resolvePromises() {
     hotelRepo = new Hotel(allBookings, allRooms)
     console.log(hotelRepo)
     setCustomer(allCustomers)
-    displayBookings(allBookings)
+    randomCustomer.showBookings(allBookings)
+    displayBookings(randomCustomer.bookings)
+    randomCustomer.showAmountSpent(allRooms)
     displayAmountSpent()
 })
     
 };
 
-function displayBookings(allBookings) {
-const singleCustomer = randomCustomer.showBookings(allBookings)  
-console.log(singleCustomer)
-
+function displayBookings(customerBookings) {
 bookingSection.innerHTML = ''
-singleCustomer.forEach(booking => {
+customerBookings.forEach(booking => {
     bookingSection.innerHTML += `
       <div class='booking-card'>
         <button class='booking-id' id='${booking.id}'>${booking.id}</button>
@@ -67,13 +66,13 @@ singleCustomer.forEach(booking => {
 }
 
 function displayAmountSpent() {
-  randomCustomer.showAmountSpent(allRooms)
-  console.log(randomCustomer)
+  amountSpentSection.innerHTML = `$${randomCustomer.showAmountSpent(allRooms).toFixed(2)}`
 }
 
 
 
 function setCustomer(arr) {
+  // randomCustomer = arr[0]
   let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];
   randomCustomer = new Customer(randomCustomerIndex);
 }
