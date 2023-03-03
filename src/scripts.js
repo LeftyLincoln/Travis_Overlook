@@ -66,13 +66,13 @@ customerBookings.forEach(booking => {
 }
 
 function displayAmountSpent() {
-  amountSpentSection.innerHTML = `Total Amount Spent at the Atlantis: $${randomCustomer.showAmountSpent(allRooms).toFixed(2)}`
+  amountSpentSection.innerHTML = `Welcome ${randomCustomer.name}! You have spent $${randomCustomer.showAmountSpent(allRooms).toFixed(2)} at the Atlantis`
 }
 
 
 
 function setCustomer(arr) {
-  // randomCustomer = arr[0]
-  let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];
-  randomCustomer = new Customer(randomCustomerIndex);
+  randomCustomer = arr[0]
+  // let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];
+  // randomCustomer = new Customer(randomCustomerIndex);
 }
