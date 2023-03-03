@@ -1,5 +1,5 @@
 * {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   font-family: 'Roboto Mono', monospace;
 }
 
@@ -26,11 +26,17 @@ h1, h2 {
 
 .booking-section {
   display:flex;
-  height: 500px;
-  
+  flex-direction: column;
+  flex-wrap:wrap;
+  height: 95vh;
+  align-content: flex-start;
 }
 
 .booking-card {
   display:flex;
-  border: 2px solid red
+  /* border: 2px solid red; */
+  padding: 2px;
+  /* width: 30vw */
+  align-items: flex-start;
+  flex-direction: row;
 }
