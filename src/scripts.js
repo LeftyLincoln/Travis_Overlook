@@ -50,11 +50,10 @@ function resolvePromises() {
 };
 
 function displayBookings(allBookings) {
-setCustomer(allCustomers)
 const singleCustomer = randomCustomer.showBookings(allBookings)  
 console.log(singleCustomer)
-bookingSection.innerHTML = ''
 
+bookingSection.innerHTML = ''
 singleCustomer.forEach(booking => {
     bookingSection.innerHTML += `
       <div class='booking-card'>
@@ -71,6 +70,8 @@ function displayAmountSpent() {
   randomCustomer.showAmountSpent(allRooms)
   console.log(randomCustomer)
 }
+
+
 
 function setCustomer(arr) {
   let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];
