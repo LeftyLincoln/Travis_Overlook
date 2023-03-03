@@ -35,13 +35,11 @@ function resolvePromises() {
   allCustomers = data[0].customers.map((customer) => new Customer(customer))
   allRooms = data[1].rooms.map((room) => new Rooms(room))
   allBookings = data[2].bookings.map(booking => booking)
-  console.log(allCustomers)
-  console.log(allRooms)
-  console.log(allBookings)
+  console.log(allCustomers, allRooms, allBookings)
   })
   .then(() => {
     hotelRepo = new Hotel(allBookings, allRooms)
-    console.log(hotelRepo)
+    // console.log(hotelRepo)
     setCustomer(allCustomers)
     randomCustomer.showBookings(allBookings)
     displayBookings(randomCustomer.bookings)
@@ -69,10 +67,11 @@ function displayAmountSpent() {
   amountSpentSection.innerHTML = `Welcome ${randomCustomer.name}! You have spent $${randomCustomer.showAmountSpent(allRooms).toFixed(2)} at the Atlantis`
 }
 
-
-
 function setCustomer(arr) {
   randomCustomer = arr[0]
+
+  //loggedInUser = id from login number - 1 
+
   // let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];
   // randomCustomer = new Customer(randomCustomerIndex);
 }

@@ -15,7 +15,6 @@ class Customer {
     allRooms.forEach(room => {
       if(room.number === booking.roomNumber) {
         acc += room.costPerNight
-        console.log(acc)
       }
     }) 
       return acc
