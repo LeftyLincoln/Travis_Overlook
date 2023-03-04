@@ -13,6 +13,8 @@ import Hotel from "./classes/Hotel";
 import { fetchPromises, postRequest } from "./apiCalls";
 
 // Query Selectors
+const usernameField = document.querySelector('#userInput')
+const passwordField = document.querySelector('#passwordInput')
 const bookingSection = document.querySelector(".booking-section");
 const amountSpentSection = document.querySelector(".amount-spent-section");
 const showAvailableRooms = document.querySelector(".show-rooms-button");
@@ -20,7 +22,7 @@ const showAvailableSection = document.querySelector(".available-section");
 const dateChosen = document.getElementById("date");
 const filterRoomSection = document.getElementById("type-of-room");
 const filterRoomBtn = document.querySelector(".filter-rooms-button");
-
+const logInButton = document.querySelector('login-submit')
 // Global Variables
 let allCustomers;
 let allRooms;
@@ -39,6 +41,9 @@ showAvailableRooms.addEventListener("click", showRooms);
 filterRoomBtn.addEventListener("click", filterRooms);
 showAvailableSection.addEventListener("click", submitABooking);
 
+// userNameField.addEventListener()
+// passwordField.addEventListener()
+logInButton.addEventListener('', authenticateUser)
 // Functions
 
 function resolvePromises() {
@@ -148,5 +153,20 @@ function submitABooking(e) {
     });
   }
 }
+
+// authenticateUser(id) {
+//  //const userId = usernameField.value.slice(-2)
+
+//   if(passwordField.value === 'overlook2021')
+
+
+// }
+
+
+
+
+
+
+
 
 export default resolvePromises;

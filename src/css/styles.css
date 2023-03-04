@@ -88,3 +88,13 @@ aside {
   background-color: grey;
   border-radius: 8px;
 }
+
+.hidden {
+  display: none;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
