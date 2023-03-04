@@ -58,11 +58,13 @@ function resolvePromises() {
     displayAmountSpent()
     dateChosen.setAttribute('value', new Date().toISOString().split('T')[0]);
     datePicked = dateChosen.value.replaceAll('-', '/')
+    showRooms()
 })
     
 };
 
 function displayBookings(customerBookings) {
+  console.log(customerBookings)
 bookingSection.innerHTML = 'Your reservations:'
 customerBookings.forEach(booking => {
     bookingSection.innerHTML += `
@@ -133,10 +135,11 @@ function submitABooking(e) {
 if (e.target.tagName === 'BUTTON') {
   const roomNumber = Number(e.target.id)
   postRequest({'userID': customer.id ,'date': datePicked, 'roomNumber': roomNumber})
-  resolvePromises()
 }
 }
 
+
+export default resolvePromises
 
 
 
