@@ -19,7 +19,8 @@ const amountSpentSection = document.querySelector('.amount-spent-section')
 const showAvailableRooms = document.querySelector('.show-rooms-button')
 const showAvailableSection = document.querySelector('.available-section')
 const dateChosen = document.getElementById('date')
-
+const filterRoomSection = document.getElementById('type-of-room')
+const filterRoomBtn = document.querySelector('.filter-rooms-button')
 
 // Global Variables
 let allCustomers;
@@ -27,6 +28,8 @@ let allRooms;
 let allBookings;
 let hotelRepo;
 let randomCustomer;
+let datePicked 
+let rooms
 
 // Event Listeners
 window.addEventListener("load", () => {
@@ -34,7 +37,7 @@ window.addEventListener("load", () => {
 });
 
 showAvailableRooms.addEventListener('click', showRooms)
-
+filterRoomBtn.addEventListener('click', filterRooms )
 
 // Functions
 
@@ -53,20 +56,20 @@ function resolvePromises() {
     displayBookings(randomCustomer.bookings)
     randomCustomer.showAmountSpent(allRooms)
     displayAmountSpent()
+    dateChosen.setAttribute('value', new Date().toISOString().split('T')[0]);
+    datePicked = dateChosen.value.replaceAll('-', '/')
 })
     
 };
 
 function displayBookings(customerBookings) {
-bookingSection.innerHTML = ''
+bookingSection.innerHTML = 'Your reservations:'
 customerBookings.forEach(booking => {
     bookingSection.innerHTML += `
       <div class='booking-card'>
-        <button class='booking-id' id='${booking.id}'>${booking.id}</button>
-        <button class='booking-id' id='${booking.userID}'>${booking.userID}</button>
-        <button class='booking-id' id='${booking.date}'>${booking.date}</button>
-        <button class='booking-id' id='${booking.roomNumber}'>${booking.roomNumber}</button>
-      </div>
+        <p class='booking-id' id='${booking.date}'>On ${booking.date} you booked room ${booking.roomNumber}
+        </p>
+        </div>
     `
   })  
 }
@@ -84,23 +87,46 @@ function setCustomer(arr) {
   // randomCustomer = new Customer(randomCustomerIndex);
 }
 
+
+
 function showRooms () {
  
-  const datePicked = dateChosen.value.replaceAll('-', '/')
-  let rooms = hotelRepo.findAvailableRooms(datePicked)
+  datePicked = dateChosen.value.replaceAll('-', '/')
+  rooms = hotelRepo.findAvailableRooms(datePicked)
 
   console.log(datePicked)
   console.log(hotelRepo.availableRooms)
   
-  showAvailableSection.innerHTML = 'Here are our available rooms'
+  showAvailableSection.innerHTML = 'Here are our available rooms for you:'
   rooms.forEach(room =>  {
   showAvailableSection.innerHTML += `
     <div class='room-card'>
-      <button class='room-id' id='${room.number}'>Room ${room.number}</button>
-      <button class='room-id' id='${room.roomType}'>is a ${room.roomType}</button>
-      <button class='room-id' id='${room.bedSize}'>with ${room.numBeds} ${room.bedSize} bed</button>
-      <button class='room-id' id='${room.costPerNight}'>The total Cost is $${room.costPerNight}</button>
+      <p class='room-id' id='${room.number}'>Room ${room.number} is a ${room.roomType}<br>
+      with ${room.numBeds} ${room.bedSize} bed and costs $${room.costPerNight} per night
+      </p>
     </div>
   `
   })
 }
+
+function filterRooms() {
+
+hotelRepo.findAvailableRooms(datePicked)
+showAvailableSection.innerHTML = ''
+
+let filteredRoom = filterRoomSection.value
+console.log(filteredRoom)
+const filteredByType = hotelRepo.filterByRoomType(filteredRoom) 
+filteredByType.forEach(room => {
+showAvailableSection.innerHTML += ` 
+  <div class='room-card'>
+    <p class='room-id' id='${room.number}'>Room ${room.number} is a ${room.roomType}<br>
+    with ${room.numBeds} ${room.bedSize} bed and costs $${room.costPerNight} per night
+    </p>
+  </div>
+  `
+})
+
+
+}
+

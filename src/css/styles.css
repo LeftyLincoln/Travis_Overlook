@@ -1,5 +1,4 @@
 * {
-  /* border: 2px solid red; */
   font-family: 'Roboto Mono', monospace;
 }
 
@@ -25,20 +24,21 @@ h1, h2 {
 }
 
 .booking-section {
+  padding-top: 10px;
   display:flex;
   flex-direction: column;
-  flex-wrap:wrap;
+  /* flex-wrap:wrap; */
   height: 95vh;
   align-content: flex-end;
 }
 
 .booking-card {
   display:flex;
-  /* border: 2px solid red; */
-  padding: 2px;
-  /* width: 30vw */
   align-items: flex-end;
   flex-direction: row;
+  border: 2px solid black;
+  border-radius: 8px;
+  margin: 3px;
 }
 
 .hidden {
@@ -49,7 +49,19 @@ h1, h2 {
   padding:5px
 }
 
+.top-section {
+  text-align: center;
+}
+
 .bottom-section {
   display: flex;
   justify-content: space-between;
+}
+
+.available-section {
+  padding-top: 10px;
+}
+
+.rules > p {
+  margin: 0;
 }

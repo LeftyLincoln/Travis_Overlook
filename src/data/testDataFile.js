@@ -32,6 +32,18 @@ const testBookings = [
     "date": "2023/01/11",
     "roomNumber": 20
   },
+  {
+    "id": "5fwrgu4i7k55hl7x7",
+    "userID": 40,
+    "date": "2022/02/07",
+    "roomNumber": 18
+  },
+  {
+    "id": "5fwrgu4i7k55hl81v",
+    "userID": 5,
+    "date": "2022/02/07",
+    "roomNumber": 9
+  }
 ]
 
 const testRooms = [
@@ -51,6 +63,38 @@ const testRooms = [
     "numBeds": 1,
     "costPerNight": 200.39
   },
+  {
+    "number": 1,
+    "roomType": "residential suite",
+    "bidet": true,
+    "bedSize": "queen",
+    "numBeds": 1,
+    "costPerNight": 358.4
+  },
+  {
+    "number": 10,
+    "roomType": "suite",
+    "bidet": false,
+    "bedSize": "twin",
+    "numBeds": 1,
+    "costPerNight": 497.64
+  },
+  {
+    "number": 11,
+    "roomType": "single room",
+    "bidet": true,
+    "bedSize": "twin",
+    "numBeds": 2,
+    "costPerNight": 207.24
+  },
+  {
+    "number": 14,
+    "roomType": "residential suite",
+    "bidet": false,
+    "bedSize": "twin",
+    "numBeds": 1,
+    "costPerNight": 457.88
+  }
 ]
 
 
