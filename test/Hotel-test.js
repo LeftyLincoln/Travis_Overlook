@@ -4,29 +4,29 @@ import testData from '../src/data/testDataFile';
 import Hotel from '../src/classes/Hotel';
 
 describe('Hotel', () => {
-  let testBookings, testRooms, hotel
+  let testBookings, testRooms, testHotel
   beforeEach(() => {
     testBookings = testData.testBookings
     testRooms = testData.testRooms
-    hotel = new Hotel(testBookings, testRooms)
+    testHotel = new Hotel(testBookings, testRooms)
   });
 
   it('should be a function', () => {
-    expect(hotel).to.be.instanceOf(Hotel);
+    expect(testHotel).to.be.instanceOf(Hotel);
   });
 
   it('should hold bookings for the hotel', () => {
-    expect(hotel.bookings).to.equal(testBookings);
+    expect(testHotel.bookings).to.equal(testBookings);
   });
 
   it('should hold rooms for the hotel', () => {
-    expect(hotel.rooms).to.equal(testRooms);
+    expect(testHotel.rooms).to.equal(testRooms);
   });
 
-  // it('should show available rooms for the hotel', () => {
-  //   hotel.findAvailableRooms()
-  //   expect(hotel.availableRooms).to.equal();
-  // });
+  it('should show available rooms for the hotel', () => {
+    testHotel.findAvailableRooms('2022/02/07')
+    expect(testHotel.availableRooms).to.equal();
+  });
 
 
 });

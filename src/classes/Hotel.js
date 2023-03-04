@@ -24,7 +24,9 @@ class Hotel {
   }
 
   filterByRoomType(value) {
-      const filteredRooms = this.availableRooms.filter(room => room.roomType === value)
+      console.log('before:',value)
+      const filteredRooms = this.availableRooms.filter(room => room.roomType == value.replaceAll('-', ' '))
+      console.log('after:', value)
       return filteredRooms
 
 

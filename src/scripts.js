@@ -28,6 +28,8 @@ let allRooms;
 let allBookings;
 let hotelRepo;
 let randomCustomer;
+let datePicked 
+let rooms
 
 // Event Listeners
 window.addEventListener("load", () => {
@@ -54,6 +56,8 @@ function resolvePromises() {
     displayBookings(randomCustomer.bookings)
     randomCustomer.showAmountSpent(allRooms)
     displayAmountSpent()
+    dateChosen.setAttribute('value', new Date().toISOString().split('T')[0]);
+    datePicked = dateChosen.value.replaceAll('-', '/')
 })
     
 };
@@ -83,8 +87,7 @@ function setCustomer(arr) {
   // randomCustomer = new Customer(randomCustomerIndex);
 }
 
-let datePicked
-let rooms
+
 
 function showRooms () {
  
@@ -107,6 +110,8 @@ function showRooms () {
 }
 
 function filterRooms() {
+
+hotelRepo.findAvailableRooms(datePicked)
 showAvailableSection.innerHTML = ''
 
 let filteredRoom = filterRoomSection.value
