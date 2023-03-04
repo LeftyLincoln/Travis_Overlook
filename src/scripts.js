@@ -96,20 +96,21 @@ function showRooms () {
   datePicked = dateChosen.value.replaceAll('-', '/')
   rooms = hotelRepo.findAvailableRooms(datePicked)
 
-  console.log(datePicked)
-  console.log(hotelRepo.availableRooms)
-  
-  showAvailableSection.innerHTML = 'Here are our available rooms for you:'
-  rooms.forEach(room =>  {
-  showAvailableSection.innerHTML += `
-    <div class='room-card'>
-      <button class='button-booking' id='${room.number}'>Book Room</button>
-      <p class='room-id' id='${room.number}'>Room ${room.number} is a ${room.roomType}<br>
-      with ${room.numBeds} ${room.bedSize} bed and costs $${room.costPerNight} per night
-      </p>
-    </div>
-  `
-  })
+  if (hotelRepo.availableRooms.length < 1) {
+    showAvailableSection.innerHTML = 'We are so deeply sorry there are no rooms on the date, please choose another date.'
+  } else {
+    showAvailableSection.innerHTML = 'Here are our available rooms for you:'
+      rooms.forEach(room =>  {
+      showAvailableSection.innerHTML += `
+        <div class='room-card'>
+          <button class='button-booking' id='${room.number}'>Book Room</button>
+          <p class='room-id' id='${room.number}'>Room ${room.number} is a ${room.roomType}<br>
+          with ${room.numBeds} ${room.bedSize} bed and costs $${room.costPerNight} per night
+          </p>
+      </div>
+    `
+    })
+  }
 }
 
 function filterRooms() {
@@ -132,6 +133,7 @@ showAvailableSection.innerHTML += `
 }
 
 function submitABooking(e) {
+
 if (e.target.tagName === 'BUTTON') {
   const roomNumber = Number(e.target.id)
   postRequest({'userID': customer.id ,'date': datePicked, 'roomNumber': roomNumber})
