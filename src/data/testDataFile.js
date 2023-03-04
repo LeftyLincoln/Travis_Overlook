@@ -32,6 +32,18 @@ const testBookings = [
     "date": "2023/01/11",
     "roomNumber": 20
   },
+  {
+    "id": "5fwrgu4i7k55hl7x7",
+    "userID": 40,
+    "date": "2022/02/07",
+    "roomNumber": 18
+  },
+  {
+    "id": "5fwrgu4i7k55hl81v",
+    "userID": 5,
+    "date": "2022/02/07",
+    "roomNumber": 9
+  }
 ]
 
 const testRooms = [

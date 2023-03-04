@@ -24,18 +24,15 @@ class Hotel {
   }
 
   filterByRoomType(value) {
-      console.log('before:',value)
       const filteredRooms = this.availableRooms.filter(room => room.roomType == value.replaceAll('-', ' '))
-      console.log('after:', value)
       return filteredRooms
-
-
+    }
 
   // addABooking(userID, date, roomNumber) {
 
   // }
 
   
-}
+
 }
 export default Hotel;
