@@ -65,3 +65,9 @@ h1, h2 {
 .rules > p {
   margin: 0;
 }
+
+.room-card {
+  border: 2px solid black;
+  border-radius: 8px;
+  display:flex;
+}

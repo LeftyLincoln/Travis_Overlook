@@ -12,7 +12,7 @@ function fetchRequest(type) {
 }
 
 function postRequest(booking) {
-  fetch('http://localhost:3001/api/v1/bookings', {
+    fetch('http://localhost:3001/api/v1/bookings', {
     method: "POST",
     body: JSON.stringify(booking),
     headers: {
