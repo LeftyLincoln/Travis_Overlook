@@ -111,8 +111,17 @@ showAvailableSection.innerHTML = ''
 
 let filteredRoom = filterRoomSection.value
 console.log(filteredRoom)
+const filteredByType = hotelRepo.filterByRoomType(filteredRoom) 
+filteredByType.forEach(room => {
+showAvailableSection.innerHTML += ` 
+  <div class='room-card'>
+    <p class='room-id' id='${room.number}'>Room ${room.number} is a ${room.roomType}<br>
+    with ${room.numBeds} ${room.bedSize} bed and costs $${room.costPerNight} per night
+    </p>
+  </div>
+  `
+})
 
-hotelRepo.filterByRoomType(filteredRoom) 
 
 }
 
