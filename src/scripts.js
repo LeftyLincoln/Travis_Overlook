@@ -10,7 +10,7 @@ import './images/turing-logo.png'
 import Customer from "./classes/Customer";
 import Rooms from "./classes/Rooms"
 import Hotel from "./classes/Hotel"
-import fetchPromises from "./apiCalls"
+import { fetchPromises, postRequest } from './apiCalls'
 
 
 // Query Selectors
@@ -27,7 +27,7 @@ let allCustomers;
 let allRooms;
 let allBookings;
 let hotelRepo;
-let randomCustomer;
+let customer;
 let datePicked 
 let rooms
 
@@ -38,6 +38,7 @@ window.addEventListener("load", () => {
 
 showAvailableRooms.addEventListener('click', showRooms)
 filterRoomBtn.addEventListener('click', filterRooms )
+showAvailableSection.addEventListener('click', submitABooking)
 
 // Functions
 
@@ -47,22 +48,23 @@ function resolvePromises() {
   allCustomers = data[0].customers.map((customer) => new Customer(customer))
   allRooms = data[1].rooms.map((room) => new Rooms(room))
   allBookings = data[2].bookings.map(booking => booking)
-  console.log(allCustomers, allRooms, allBookings)
   })
   .then(() => {
     hotelRepo = new Hotel(allBookings, allRooms)
     setCustomer(allCustomers)
-    randomCustomer.showBookings(allBookings)
-    displayBookings(randomCustomer.bookings)
-    randomCustomer.showAmountSpent(allRooms)
+    customer.showBookings(allBookings)
+    displayBookings(customer.bookings)
+    customer.showAmountSpent(allRooms)
     displayAmountSpent()
     dateChosen.setAttribute('value', new Date().toISOString().split('T')[0]);
     datePicked = dateChosen.value.replaceAll('-', '/')
+    showRooms()
 })
     
 };
 
 function displayBookings(customerBookings) {
+  console.log(customerBookings)
 bookingSection.innerHTML = 'Your reservations:'
 customerBookings.forEach(booking => {
     bookingSection.innerHTML += `
@@ -75,11 +77,11 @@ customerBookings.forEach(booking => {
 }
 
 function displayAmountSpent() {
-  amountSpentSection.innerHTML = `Welcome ${randomCustomer.name}! You have spent $${randomCustomer.showAmountSpent(allRooms).toFixed(2)} at the Atlantis`
+  amountSpentSection.innerHTML = `Welcome ${customer.name}! You have spent $${customer.showAmountSpent(allRooms).toFixed(2)} at the Atlantis`
 }
 
 function setCustomer(arr) {
-  randomCustomer = arr[0]
+  customer = arr[3]
 
   //loggedInUser = id from login number - 1 
 
@@ -94,39 +96,55 @@ function showRooms () {
   datePicked = dateChosen.value.replaceAll('-', '/')
   rooms = hotelRepo.findAvailableRooms(datePicked)
 
-  console.log(datePicked)
-  console.log(hotelRepo.availableRooms)
-  
-  showAvailableSection.innerHTML = 'Here are our available rooms for you:'
-  rooms.forEach(room =>  {
-  showAvailableSection.innerHTML += `
-    <div class='room-card'>
-      <p class='room-id' id='${room.number}'>Room ${room.number} is a ${room.roomType}<br>
-      with ${room.numBeds} ${room.bedSize} bed and costs $${room.costPerNight} per night
-      </p>
-    </div>
-  `
-  })
+  if (hotelRepo.availableRooms.length < 1) {
+    showAvailableSection.innerHTML = 'We are so deeply sorry there are no rooms on the date, please choose another date.'
+  } else {
+    showAvailableSection.innerHTML = 'Here are our available rooms for you:'
+      rooms.forEach(room =>  {
+      showAvailableSection.innerHTML += `
+        <div class='room-card'>
+          <button class='button-booking' id='${room.number}'>Book Room</button>
+          <p class='room-id' id='${room.number}'>Room ${room.number} is a ${room.roomType}<br>
+          with ${room.numBeds} ${room.bedSize} bed and costs $${room.costPerNight} per night
+          </p>
+      </div>
+    `
+    })
+  }
 }
 
 function filterRooms() {
 
 hotelRepo.findAvailableRooms(datePicked)
 showAvailableSection.innerHTML = ''
-
 let filteredRoom = filterRoomSection.value
-console.log(filteredRoom)
 const filteredByType = hotelRepo.filterByRoomType(filteredRoom) 
+
 filteredByType.forEach(room => {
 showAvailableSection.innerHTML += ` 
   <div class='room-card'>
+    <button class='button-booking' id='${room.number}'>Book Room</button>
     <p class='room-id' id='${room.number}'>Room ${room.number} is a ${room.roomType}<br>
     with ${room.numBeds} ${room.bedSize} bed and costs $${room.costPerNight} per night
     </p>
   </div>
   `
 })
-
-
 }
+
+function submitABooking(e) {
+
+if (e.target.tagName === 'BUTTON') {
+  const roomNumber = Number(e.target.id)
+  postRequest({'userID': customer.id ,'date': datePicked, 'roomNumber': roomNumber})
+}
+}
+
+
+export default resolvePromises
+
+
+
+
+
 
