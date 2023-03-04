@@ -10,8 +10,10 @@
 <body>
   <aside>
     <h2>Pick Your Day to Stay</h2>
-    <input type="date" id="date" min="2022-01-01" max="2023-12-31">
+    <label for="date">Choose Date:</label>
+    <input type="date" label="calendar" id="date" min="2022-01-01" max="2023-12-31">
     <button class="show-rooms-button">Submit Date</button>
+    <label for="type-of-room">Room Type:</label>
     <select name="Type of Room" id="type-of-room">
       <option value="" selected disabled>Pick One</option>
       <option value="residential-suite">Residential Suite</option>
@@ -19,7 +21,7 @@
       <option value="single-room">Single Room</option>
       <option value="junior-suite">Junior Suite</option>
     </select>
-    <button class="filter-rooms-button">Submit Room Type</button>
+    <button class="filter-rooms-button">Search</button>
   </aside>
   <main>
     <section class="top-section">

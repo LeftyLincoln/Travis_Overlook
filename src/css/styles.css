@@ -71,3 +71,20 @@ h1, h2 {
   border-radius: 8px;
   display:flex;
 }
+
+button, input, select {
+  cursor: pointer;
+}
+
+aside {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.button-booking:hover, .show-rooms-button:hover, .filter-rooms-button:hover {
+  scale: 1.1;
+  background-color: grey;
+  border-radius: 8px;
+}
