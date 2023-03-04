@@ -11,13 +11,31 @@ function fetchRequest(type) {
   .catch(error => console.log(`Issue at: ${error}`))
 }
 
+function postRequest(booking) {
+  fetch('http://localhost:3001/api/v1/bookings', {
+    method: "POST",
+    body: JSON.stringify(booking),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if(!response.ok) {
+      throw new Error(response.status)
+    } else {
+      resolvePromises()
+    }
+  })
+  .catch(error => console.log(`Issue at: ${error}`));
+};
 
-export default function fetchPromises() {
+
+function fetchPromises() {
   const allCustomers = fetchRequest('customers');
   const allRooms = fetchRequest('rooms');
   const allBookings = fetchRequest('bookings');
   return Promise.all([allCustomers, allRooms, allBookings]);
 };
 
-
+export { fetchPromises, postRequest };
 

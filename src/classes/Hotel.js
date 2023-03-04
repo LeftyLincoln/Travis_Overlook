@@ -27,12 +27,5 @@ class Hotel {
       const filteredRooms = this.availableRooms.filter(room => room.roomType == value.replaceAll('-', ' '))
       return filteredRooms
     }
-
-  // addABooking(userID, date, roomNumber) {
-
-  // }
-
-  
-
 }
 export default Hotel;

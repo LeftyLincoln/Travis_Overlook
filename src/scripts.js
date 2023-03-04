@@ -10,7 +10,7 @@ import './images/turing-logo.png'
 import Customer from "./classes/Customer";
 import Rooms from "./classes/Rooms"
 import Hotel from "./classes/Hotel"
-import fetchPromises from "./apiCalls"
+import { fetchPromises, postRequest } from './apiCalls'
 
 
 // Query Selectors
@@ -21,6 +21,7 @@ const showAvailableSection = document.querySelector('.available-section')
 const dateChosen = document.getElementById('date')
 const filterRoomSection = document.getElementById('type-of-room')
 const filterRoomBtn = document.querySelector('.filter-rooms-button')
+const makeABookingBtn = document.querySelector('.make-book-button')
 
 // Global Variables
 let allCustomers;
@@ -38,7 +39,7 @@ window.addEventListener("load", () => {
 
 showAvailableRooms.addEventListener('click', showRooms)
 filterRoomBtn.addEventListener('click', filterRooms )
-
+makeABookingBtn.addEventListener('click', submitABooking)
 // Functions
 
 function resolvePromises() {
@@ -120,13 +121,24 @@ const filteredByType = hotelRepo.filterByRoomType(filteredRoom)
 filteredByType.forEach(room => {
 showAvailableSection.innerHTML += ` 
   <div class='room-card'>
+    <button class='button-booking' id='${room.number}'>Book Room Below</button>
     <p class='room-id' id='${room.number}'>Room ${room.number} is a ${room.roomType}<br>
     with ${room.numBeds} ${room.bedSize} bed and costs $${room.costPerNight} per night
     </p>
   </div>
   `
 })
-
-
 }
+
+// function submitABooking() {
+  
+//  postRequest({'userID': ,'date': , 'roomNumber': ,}) 
+// }
+
+//{ "userID": 48, "date": "2019/09/23", "roomNumber": 4 }
+
+
+
+
+
 
