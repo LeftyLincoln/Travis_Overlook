@@ -36,6 +36,9 @@ h1, h2 {
   display:flex;
   align-items: flex-end;
   flex-direction: row;
+  border: 2px solid black;
+  border-radius: 8px;
+  margin: 3px;
 }
 
 .hidden {

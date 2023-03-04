@@ -23,6 +23,12 @@ class Hotel {
     return this.availableRooms
   }
 
+  filterByRoomType(value) {
+      const filteredRooms = this.availableRooms.filter(room => room.roomType === value)
+      return filteredRooms
+
+
+
   // addABooking(userID, date, roomNumber) {
 
   // }

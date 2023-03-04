@@ -19,7 +19,8 @@ const amountSpentSection = document.querySelector('.amount-spent-section')
 const showAvailableRooms = document.querySelector('.show-rooms-button')
 const showAvailableSection = document.querySelector('.available-section')
 const dateChosen = document.getElementById('date')
-
+const filterRoomSection = document.getElementById('type-of-room')
+const filterRoomBtn = document.querySelector('.filter-rooms-button')
 
 // Global Variables
 let allCustomers;
@@ -34,7 +35,7 @@ window.addEventListener("load", () => {
 });
 
 showAvailableRooms.addEventListener('click', showRooms)
-
+filterRoomBtn.addEventListener('click', filterRooms )
 
 // Functions
 
@@ -58,9 +59,8 @@ function resolvePromises() {
 };
 
 function displayBookings(customerBookings) {
-const sorted = customerBookings.sort()
 bookingSection.innerHTML = 'Your reservations:'
-sorted.forEach(booking => {
+customerBookings.forEach(booking => {
     bookingSection.innerHTML += `
       <div class='booking-card'>
         <p class='booking-id' id='${booking.date}'>On ${booking.date} you booked room ${booking.roomNumber}
@@ -83,10 +83,13 @@ function setCustomer(arr) {
   // randomCustomer = new Customer(randomCustomerIndex);
 }
 
+let datePicked
+let rooms
+
 function showRooms () {
  
-  const datePicked = dateChosen.value.replaceAll('-', '/')
-  let rooms = hotelRepo.findAvailableRooms(datePicked)
+  datePicked = dateChosen.value.replaceAll('-', '/')
+  rooms = hotelRepo.findAvailableRooms(datePicked)
 
   console.log(datePicked)
   console.log(hotelRepo.availableRooms)
@@ -102,3 +105,14 @@ function showRooms () {
   `
   })
 }
+
+function filterRooms() {
+showAvailableSection.innerHTML = ''
+
+let filteredRoom = filterRoomSection.value
+console.log(filteredRoom)
+
+hotelRepo.filterByRoomType(filteredRoom) 
+
+}
+
