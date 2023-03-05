@@ -48,7 +48,10 @@ window.addEventListener("load", () => {
 
 showAvailableRooms.addEventListener("click", showRooms);
 filterRoomBtn.addEventListener("click", filterRooms);
-showAvailableSection.addEventListener("click", submitABooking);
+showAvailableSection.addEventListener("click", (e) => {
+  submitABooking(e)
+  updateCustomerData()
+});
 
 logInForm.addEventListener('submit', (e) => {
   e.preventDefault()
@@ -73,7 +76,6 @@ function resolvePromises() {
 }
 
 function displayBookings(customerBookings) {
-  console.log(customerBookings);
   bookingSection.innerHTML = "Your reservations:";
   customerBookings.forEach((booking) => {
     bookingSection.innerHTML += `
@@ -137,9 +139,7 @@ function filterRooms() {
 }
 
 function submitABooking(e) {
-  console.log(e.target.tagName)
   if (e.target.tagName === "BUTTON") {
-    console.log('i heart joe')
     const roomNumber = Number(e.target.id);
     postRequest({
       userID: customer.id,
@@ -151,7 +151,6 @@ function submitABooking(e) {
 
 const checkPassword = () => {
   if (passwordField.value === "overlook2021") {
-    console.log("good work");
     getCustomerData()
     showDashboard()
   } else {
@@ -174,16 +173,19 @@ const getCustomerData = () => {
   fetchRequest(`customers/${userID}`)
   .then(data => {
     customer = new Customer(data)
-    console.log(customer)
     customer.showBookings(allBookings)
     customer.showAmountSpent(allRooms)
     displayBookings(customer.bookings)
     displayAmountSpent()
-
   })
-  
- 
 };
+
+const updateCustomerData = () => {
+  customer.showBookings(allBookings)
+  customer.showAmountSpent(allRooms)
+  displayBookings(customer.bookings)
+  displayAmountSpent()
+}
 
 
 
