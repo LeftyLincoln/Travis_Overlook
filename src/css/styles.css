@@ -94,12 +94,16 @@ aside {
   border-radius: 8px;
 }
 
-.hidden {
-  display: none;
-}
-
 .login {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.login-form {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
 }

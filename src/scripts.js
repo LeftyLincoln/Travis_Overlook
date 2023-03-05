@@ -15,7 +15,6 @@ import { fetchPromises, fetchRequest, postRequest } from "./apiCalls";
 
 // Query Selectors
 
-
 const bookingSection = document.querySelector(".booking-section");
 const amountSpentSection = document.querySelector(".amount-spent-section");
 const showAvailableRooms = document.querySelector(".show-rooms-button");
@@ -152,6 +151,7 @@ function submitABooking(e) {
 }
 
 const authenticateLogin = () => {
+
 const userName = usernameField.value
 const passWord = passwordField.value
 
@@ -162,7 +162,6 @@ if(userName && passWord) {
     errorMessage.innerText = "Incorrect password! Perhaps try again"
   } else {
     const userID = parseInt(usernameField.value.split('customer')[1])
-    // const userID = Number(usernameField.value.slice(-2))
     if(userID < 1 || userID > 50) {
       errorMessage.innerText = 'No user found with that name'
     } else {
@@ -171,13 +170,6 @@ if(userName && passWord) {
     }
   }
   }
-};
-
-const showDashboard = () => {
-  signInPage.classList.add("hidden");
-  asideSection.classList.remove("hidden");
-  topSection.classList.remove("hidden");
-  bottomSection.classList.remove("hidden");
 };
 
 const getCustomerData = () => {
@@ -193,11 +185,19 @@ const getCustomerData = () => {
   })
 };
 
+const showDashboard = () => {
+  signInPage.classList.add("hidden");
+  asideSection.classList.remove("hidden");
+  topSection.classList.remove("hidden");
+  bottomSection.classList.remove("hidden");
+};
+
 const updateCustomerData = () => {
   customer.showBookings(allBookings)
   customer.showAmountSpent(allRooms)
   displayAmountSpent()
   displayBookings(customer.bookings)
+  console.log(customer.bookings)
 }
 
 export default resolvePromises;
