@@ -8,7 +8,7 @@
   <title>Welcome to Atlantis</title>
 </head>
 <body>
-  <aside class="aside">
+  <aside class="aside hidden">
     <h2>Pick Your Day to Stay</h2>
     <label for="date">Choose Date:</label>
     <input type="date" label="calendar" id="date" min="2022-01-01" max="2023-12-31">
@@ -24,19 +24,19 @@
     <button class="filter-rooms-button">Search</button>
   </aside>
   <main>
-    <!-- <section class="sign-in-page hidden">
-      <form>
+    <section class="sign-in-page">
+      <form class="login-form">
       <h1 class="login-title">Welcome to the Atlantis <br> Please Log In</h1>
-      <input class="login-input" type="userName" id="userInput" placeholder=" username">
-      <input class="login-input" type="password" id="passwordInput" placeholder=" password">
-      <button class="login-submit">Submit</button>
+      <input class="login-input" type="userName" id="userInput" placeholder=" username" required>
+      <input class="login-input" type="password" id="passwordInput" placeholder=" password" required>
+      <button type="submit">Submit</button>
       </form>
-    </section> -->
-    <section class="top-section ">
+    </section>
+    <section class="top-section hidden ">
       <h1>Welcome to Atlantis</h1>
       <section class="amount-spent-section"></section>
     </section>
-    <section class="bottom-section ">
+    <section class="bottom-section hidden">
       <section class="available-section"></section>
       <section class="booking-section"></section>
     </section>

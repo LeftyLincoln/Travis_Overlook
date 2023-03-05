@@ -1,3 +1,4 @@
+
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
@@ -10,11 +11,11 @@ import "./images/turing-logo.png";
 import Customer from "./classes/Customer";
 import Rooms from "./classes/Rooms";
 import Hotel from "./classes/Hotel";
-import { fetchPromises, postRequest } from "./apiCalls";
+import { fetchPromises, fetchRequest, postRequest } from "./apiCalls";
 
 // Query Selectors
-// const usernameField = document.querySelector("#userInput");
-// const passwordField = document.querySelector("#passwordInput");
+
+
 const bookingSection = document.querySelector(".booking-section");
 const amountSpentSection = document.querySelector(".amount-spent-section");
 const showAvailableRooms = document.querySelector(".show-rooms-button");
@@ -22,11 +23,14 @@ const showAvailableSection = document.querySelector(".available-section");
 const dateChosen = document.getElementById("date");
 const filterRoomSection = document.getElementById("type-of-room");
 const filterRoomBtn = document.querySelector(".filter-rooms-button");
-// const logInButton = document.querySelector("login-submit");
-// const logInPage = document.querySelector(".login");
-// const asideSection = document.querySelector(".aside");
-// const topSection = document.querySelector(".top-section");
-// const bottomSection = document.querySelector(".bottom-section");
+const logInForm = document.querySelector(".login-form");
+const signInPage = document.querySelector(".sign-in-page");
+const asideSection = document.querySelector(".aside");
+const topSection = document.querySelector(".top-section");
+const bottomSection = document.querySelector(".bottom-section");
+const usernameField = document.getElementById("userInput");
+const passwordField = document.getElementById("passwordInput");
+
 
 // Global Variables
 let allCustomers;
@@ -46,34 +50,29 @@ showAvailableRooms.addEventListener("click", showRooms);
 filterRoomBtn.addEventListener("click", filterRooms);
 showAvailableSection.addEventListener("click", submitABooking);
 
-// logInButton.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   checkPassword();
-// });
+logInForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+  checkPassword()
+})
 
 // Functions
 
-const resolvePromises = () => {
+function resolvePromises() {
   fetchPromises()
     .then((data) => {
-      allCustomers = data[0].customers.map((customer) => new Customer(customer))
-      allRooms = data[1].rooms.map((room) => new Rooms(room))
-      allBookings = data[2].bookings.map((booking) => booking)
+      allCustomers = data[0].customers.map((customer) => new Customer(customer));
+      allRooms = data[1].rooms.map((room) => new Rooms(room));
+      allBookings = data[2].bookings.map((booking) => booking);
     })
     .then(() => {
-      hotelRepo = new Hotel(allBookings, allRooms)
-      setCustomer(allCustomers)
-      customer.showBookings(allBookings)
-      displayBookings(customer.bookings)
-      customer.showAmountSpent(allRooms)
-      displayAmountSpent()
+      hotelRepo = new Hotel(allBookings, allRooms);
       dateChosen.setAttribute("value", new Date().toISOString().split("T")[0]);
       datePicked = dateChosen.value.replaceAll("-", "/");
-      showRooms();
+      showRooms()
     });
-};
+}
 
-const displayBookings = (customerBookings) => {
+function displayBookings(customerBookings) {
   console.log(customerBookings);
   bookingSection.innerHTML = "Your reservations:";
   customerBookings.forEach((booking) => {
@@ -84,26 +83,21 @@ const displayBookings = (customerBookings) => {
         </div>
       `;
   });
-};
+}
 
-const displayAmountSpent = () => {
+function displayAmountSpent() {
   amountSpentSection.innerHTML = `Welcome ${customer.name}! You have spent $${customer
     .showAmountSpent(allRooms)
     .toFixed(2)} at the Atlantis`;
-};
+}
 
-const setCustomer = (arr) => {
-  customer = arr[3];
-  //loggedInUser = id from login number - 1
-};
-
-const showRooms = () => {
+function showRooms() {
   datePicked = dateChosen.value.replaceAll("-", "/");
   rooms = hotelRepo.findAvailableRooms(datePicked);
 
   if (hotelRepo.availableRooms.length < 1) {
     showAvailableSection.innerHTML =
-      "We are so deeply sorry there are no rooms on this date, please choose another date.";
+      "We are so deeply sorry there are no rooms on the date, please choose another date.";
   } else {
     showAvailableSection.innerHTML = "Here are our available rooms for you:";
     rooms.forEach((room) => {
@@ -117,9 +111,9 @@ const showRooms = () => {
     `;
     });
   }
-};
+}
 
-const filterRooms = () => {
+function filterRooms() {
   hotelRepo.findAvailableRooms(datePicked);
   showAvailableSection.innerHTML = "";
   let filteredRoom = filterRoomSection.value;
@@ -140,10 +134,12 @@ const filterRooms = () => {
     `;
     });
   }
-};
+}
 
-const submitABooking = (e) => {
+function submitABooking(e) {
+  console.log(e.target.tagName)
   if (e.target.tagName === "BUTTON") {
+    console.log('i heart joe')
     const roomNumber = Number(e.target.id);
     postRequest({
       userID: customer.id,
@@ -151,36 +147,49 @@ const submitABooking = (e) => {
       roomNumber: roomNumber,
     });
   }
+}
+
+const checkPassword = () => {
+  if (passwordField.value === "overlook2021") {
+    console.log("good work");
+    getCustomerData()
+    showDashboard()
+  } else {
+    alert("Please check your password and try again");
+  }
 };
 
-//const userId = usernameField.value.slice(-2)
 
-// const checkPassword = () => {
-//   if (passwordField.value === "overlook2021") {
-//     console.log("good work");
-//     // getCustomerData()
-//     // showDashboard()
-//     //resolvePromises() ??
-//   } else {
-//     alert("Please check your password and try again");
-//   }
-// };
+const showDashboard = () => {
+  signInPage.classList.add("hidden");
+  asideSection.classList.remove("hidden");
+  topSection.classList.remove("hidden");
+  bottomSection.classList.remove("hidden");
+};
 
-// const showDashboard = () => {
-//   logInPage.classList.add("hidden");
-//   asideSection.classList.remove("hidden");
-//   topSection.classList.remove("hidden");
-//   bottomSection.classList.remove("hidden");
-// };
 
-// const getCustomerData = () => {
-//   const userID = Number(usernameField.value.slice(-2));
-//   const i = allCustomers.map((customer) => customer.id).indexOf(userID);
-//   customer = new Customer(allCustomers[i]);
-//   customer.showBookings(allBookings)
-//   customer.showAmountSpent(allRooms)
-//   displayBookings()
-//   displayAmountSpent()
-// };
+
+const getCustomerData = () => {
+  const userID = Number(usernameField.value.slice(-2));
+  fetchRequest(`customers/${userID}`)
+  .then(data => {
+    customer = new Customer(data)
+    console.log(customer)
+    customer.showBookings(allBookings)
+    customer.showAmountSpent(allRooms)
+    displayBookings(customer.bookings)
+    displayAmountSpent()
+
+  })
+  
+ 
+};
+
+
+
+
+
+
+
 
 export default resolvePromises;
