@@ -33,6 +33,7 @@ const passwordField = document.getElementById("passwordInput");
 
 
 // Global Variables
+
 let allCustomers;
 let allRooms;
 let allBookings;
@@ -48,6 +49,7 @@ window.addEventListener("load", () => {
 
 showAvailableRooms.addEventListener("click", showRooms);
 filterRoomBtn.addEventListener("click", filterRooms);
+
 showAvailableSection.addEventListener("click", (e) => {
   submitABooking(e)
   updateCustomerData()
@@ -158,15 +160,12 @@ const checkPassword = () => {
   }
 };
 
-
 const showDashboard = () => {
   signInPage.classList.add("hidden");
   asideSection.classList.remove("hidden");
   topSection.classList.remove("hidden");
   bottomSection.classList.remove("hidden");
 };
-
-
 
 const getCustomerData = () => {
   const userID = Number(usernameField.value.slice(-2));
@@ -183,15 +182,8 @@ const getCustomerData = () => {
 const updateCustomerData = () => {
   customer.showBookings(allBookings)
   customer.showAmountSpent(allRooms)
-  displayBookings(customer.bookings)
   displayAmountSpent()
+  displayBookings(customer.bookings)
 }
-
-
-
-
-
-
-
 
 export default resolvePromises;
