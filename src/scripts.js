@@ -30,7 +30,7 @@ const topSection = document.querySelector(".top-section");
 const bottomSection = document.querySelector(".bottom-section");
 const usernameField = document.getElementById("userInput");
 const passwordField = document.getElementById("passwordInput");
-
+const errorMessage = document.querySelector('.error-message')
 
 // Global Variables
 
@@ -57,7 +57,7 @@ showAvailableSection.addEventListener("click", (e) => {
 
 logInForm.addEventListener('submit', (e) => {
   e.preventDefault()
-  checkPassword()
+  authenticateLogin()
 })
 
 // Functions
@@ -151,12 +151,25 @@ function submitABooking(e) {
   }
 }
 
-const checkPassword = () => {
-  if (passwordField.value === "overlook2021") {
-    getCustomerData()
-    showDashboard()
+const authenticateLogin = () => {
+const userName = usernameField.value
+const passWord = passwordField.value
+
+if(userName && passWord) {
+  if(!userName.includes('customer')) {
+    errorMessage.innerText = "No customer found with that name"
+  } else if (passWord !== 'overlook2021') {
+    errorMessage.innerText = "Incorrect password! Perhaps try again"
   } else {
-    alert("Please check your password and try again");
+    const userID = parseInt(usernameField.value.split('customer')[1])
+    // const userID = Number(usernameField.value.slice(-2))
+    if(userID < 1 || userID > 50) {
+      errorMessage.innerText = 'No user found with that name'
+    } else {
+        getCustomerData()
+        showDashboard()
+    }
+  }
   }
 };
 
@@ -168,7 +181,8 @@ const showDashboard = () => {
 };
 
 const getCustomerData = () => {
-  const userID = Number(usernameField.value.slice(-2));
+  const userID = parseInt(usernameField.value.split('customer')[1])
+  // const userID = Number(usernameField.value.slice(-2));
   fetchRequest(`customers/${userID}`)
   .then(data => {
     customer = new Customer(data)
