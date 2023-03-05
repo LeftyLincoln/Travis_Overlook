@@ -39,5 +39,5 @@ function fetchPromises() {
   return Promise.all([allCustomers, allRooms, allBookings]);
 };
 
-export { fetchPromises, postRequest };
+export { fetchPromises, fetchRequest, postRequest };
 
