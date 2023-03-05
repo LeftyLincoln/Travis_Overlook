@@ -13,8 +13,8 @@ import Hotel from "./classes/Hotel";
 import { fetchPromises, postRequest } from "./apiCalls";
 
 // Query Selectors
-const usernameField = document.querySelector("#userInput");
-const passwordField = document.querySelector("#passwordInput");
+// const usernameField = document.querySelector("#userInput");
+// const passwordField = document.querySelector("#passwordInput");
 const bookingSection = document.querySelector(".booking-section");
 const amountSpentSection = document.querySelector(".amount-spent-section");
 const showAvailableRooms = document.querySelector(".show-rooms-button");
@@ -22,18 +22,17 @@ const showAvailableSection = document.querySelector(".available-section");
 const dateChosen = document.getElementById("date");
 const filterRoomSection = document.getElementById("type-of-room");
 const filterRoomBtn = document.querySelector(".filter-rooms-button");
-const logInButton = document.querySelector("login-submit");
-const logInPage = document.querySelector(".login");
-const asideSection = document.querySelector(".aside");
-const topSection = document.querySelector(".top-section");
-const bottomSection = document.querySelector(".bottom-section");
+// const logInButton = document.querySelector("login-submit");
+// const logInPage = document.querySelector(".login");
+// const asideSection = document.querySelector(".aside");
+// const topSection = document.querySelector(".top-section");
+// const bottomSection = document.querySelector(".bottom-section");
 
 // Global Variables
 let allCustomers;
 let allRooms;
 let allBookings;
 let hotelRepo;
-let customerStatic;
 let customer;
 let datePicked;
 let rooms;
@@ -50,7 +49,6 @@ showAvailableSection.addEventListener("click", submitABooking);
 // logInButton.addEventListener("submit", (e) => {
 //   e.preventDefault();
 //   checkPassword();
-//   resolvePromises();
 // });
 
 // Functions
@@ -58,19 +56,17 @@ showAvailableSection.addEventListener("click", submitABooking);
 const resolvePromises = () => {
   fetchPromises()
     .then((data) => {
-      allCustomers = data[0].customers.map(
-        (customer) => new Customer(customer)
-      );
-      allRooms = data[1].rooms.map((room) => new Rooms(room));
-      allBookings = data[2].bookings.map((booking) => booking);
+      allCustomers = data[0].customers.map((customer) => new Customer(customer))
+      allRooms = data[1].rooms.map((room) => new Rooms(room))
+      allBookings = data[2].bookings.map((booking) => booking)
     })
     .then(() => {
-      hotelRepo = new Hotel(allBookings, allRooms);
-      setCustomer(allCustomers);
-      customerStatic.showBookings(allBookings);
-      displayBookings(customerStatic.bookings);
-      customerStatic.showAmountSpent(allRooms);
-      displayAmountSpent();
+      hotelRepo = new Hotel(allBookings, allRooms)
+      setCustomer(allCustomers)
+      customer.showBookings(allBookings)
+      displayBookings(customer.bookings)
+      customer.showAmountSpent(allRooms)
+      displayAmountSpent()
       dateChosen.setAttribute("value", new Date().toISOString().split("T")[0]);
       datePicked = dateChosen.value.replaceAll("-", "/");
       showRooms();
@@ -91,13 +87,13 @@ const displayBookings = (customerBookings) => {
 };
 
 const displayAmountSpent = () => {
-  amountSpentSection.innerHTML = `Welcome ${customerStatic.name}! You have spent $${customerStatic
+  amountSpentSection.innerHTML = `Welcome ${customer.name}! You have spent $${customer
     .showAmountSpent(allRooms)
     .toFixed(2)} at the Atlantis`;
 };
 
 const setCustomer = (arr) => {
-  customerStatic = arr[3];
+  customer = arr[3];
   //loggedInUser = id from login number - 1
 };
 
@@ -107,7 +103,7 @@ const showRooms = () => {
 
   if (hotelRepo.availableRooms.length < 1) {
     showAvailableSection.innerHTML =
-      "We are so deeply sorry there are no rooms on the date, please choose another date.";
+      "We are so deeply sorry there are no rooms on this date, please choose another date.";
   } else {
     showAvailableSection.innerHTML = "Here are our available rooms for you:";
     rooms.forEach((room) => {
@@ -150,7 +146,7 @@ const submitABooking = (e) => {
   if (e.target.tagName === "BUTTON") {
     const roomNumber = Number(e.target.id);
     postRequest({
-      userID: customerStatic.id,
+      userID: customer.id,
       date: datePicked,
       roomNumber: roomNumber,
     });
