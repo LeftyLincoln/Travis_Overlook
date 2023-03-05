@@ -13,8 +13,8 @@ import Hotel from "./classes/Hotel";
 import { fetchPromises, postRequest } from "./apiCalls";
 
 // Query Selectors
-const usernameField = document.querySelector('#userInput')
-const passwordField = document.querySelector('#passwordInput')
+const usernameField = document.querySelector("#userInput");
+const passwordField = document.querySelector("#passwordInput");
 const bookingSection = document.querySelector(".booking-section");
 const amountSpentSection = document.querySelector(".amount-spent-section");
 const showAvailableRooms = document.querySelector(".show-rooms-button");
@@ -22,12 +22,18 @@ const showAvailableSection = document.querySelector(".available-section");
 const dateChosen = document.getElementById("date");
 const filterRoomSection = document.getElementById("type-of-room");
 const filterRoomBtn = document.querySelector(".filter-rooms-button");
-const logInButton = document.querySelector('login-submit')
+const logInButton = document.querySelector("login-submit");
+const logInPage = document.querySelector(".login");
+const asideSection = document.querySelector(".aside");
+const topSection = document.querySelector(".top-section");
+const bottomSection = document.querySelector(".bottom-section");
+
 // Global Variables
 let allCustomers;
 let allRooms;
 let allBookings;
 let hotelRepo;
+let customerStatic;
 let customer;
 let datePicked;
 let rooms;
@@ -41,12 +47,15 @@ showAvailableRooms.addEventListener("click", showRooms);
 filterRoomBtn.addEventListener("click", filterRooms);
 showAvailableSection.addEventListener("click", submitABooking);
 
-// userNameField.addEventListener()
-// passwordField.addEventListener()
-logInButton.addEventListener('', authenticateUser)
+// logInButton.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   checkPassword();
+//   resolvePromises();
+// });
+
 // Functions
 
-function resolvePromises() {
+const resolvePromises = () => {
   fetchPromises()
     .then((data) => {
       allCustomers = data[0].customers.map(
@@ -58,17 +67,17 @@ function resolvePromises() {
     .then(() => {
       hotelRepo = new Hotel(allBookings, allRooms);
       setCustomer(allCustomers);
-      customer.showBookings(allBookings);
-      displayBookings(customer.bookings);
-      customer.showAmountSpent(allRooms);
+      customerStatic.showBookings(allBookings);
+      displayBookings(customerStatic.bookings);
+      customerStatic.showAmountSpent(allRooms);
       displayAmountSpent();
       dateChosen.setAttribute("value", new Date().toISOString().split("T")[0]);
       datePicked = dateChosen.value.replaceAll("-", "/");
       showRooms();
     });
-}
+};
 
-function displayBookings(customerBookings) {
+const displayBookings = (customerBookings) => {
   console.log(customerBookings);
   bookingSection.innerHTML = "Your reservations:";
   customerBookings.forEach((booking) => {
@@ -79,26 +88,20 @@ function displayBookings(customerBookings) {
         </div>
       `;
   });
-}
+};
 
-function displayAmountSpent() {
-  amountSpentSection.innerHTML = `Welcome ${
-    customer.name
-  }! You have spent $${customer
+const displayAmountSpent = () => {
+  amountSpentSection.innerHTML = `Welcome ${customerStatic.name}! You have spent $${customerStatic
     .showAmountSpent(allRooms)
     .toFixed(2)} at the Atlantis`;
-}
+};
 
-function setCustomer(arr) {
-  customer = arr[3];
-
+const setCustomer = (arr) => {
+  customerStatic = arr[3];
   //loggedInUser = id from login number - 1
+};
 
-  // let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];
-  // randomCustomer = new Customer(randomCustomerIndex);
-}
-
-function showRooms() {
+const showRooms = () => {
   datePicked = dateChosen.value.replaceAll("-", "/");
   rooms = hotelRepo.findAvailableRooms(datePicked);
 
@@ -118,9 +121,9 @@ function showRooms() {
     `;
     });
   }
-}
+};
 
-function filterRooms() {
+const filterRooms = () => {
   hotelRepo.findAvailableRooms(datePicked);
   showAvailableSection.innerHTML = "";
   let filteredRoom = filterRoomSection.value;
@@ -141,32 +144,47 @@ function filterRooms() {
     `;
     });
   }
-}
+};
 
-function submitABooking(e) {
+const submitABooking = (e) => {
   if (e.target.tagName === "BUTTON") {
     const roomNumber = Number(e.target.id);
     postRequest({
-      userID: customer.id,
+      userID: customerStatic.id,
       date: datePicked,
       roomNumber: roomNumber,
     });
   }
-}
+};
 
-// authenticateUser(id) {
-//  //const userId = usernameField.value.slice(-2)
+//const userId = usernameField.value.slice(-2)
 
-//   if(passwordField.value === 'overlook2021')
+// const checkPassword = () => {
+//   if (passwordField.value === "overlook2021") {
+//     console.log("good work");
+//     // getCustomerData()
+//     // showDashboard()
+//     //resolvePromises() ??
+//   } else {
+//     alert("Please check your password and try again");
+//   }
+// };
 
+// const showDashboard = () => {
+//   logInPage.classList.add("hidden");
+//   asideSection.classList.remove("hidden");
+//   topSection.classList.remove("hidden");
+//   bottomSection.classList.remove("hidden");
+// };
 
-// }
-
-
-
-
-
-
-
+// const getCustomerData = () => {
+//   const userID = Number(usernameField.value.slice(-2));
+//   const i = allCustomers.map((customer) => customer.id).indexOf(userID);
+//   customer = new Customer(allCustomers[i]);
+//   customer.showBookings(allBookings)
+//   customer.showAmountSpent(allRooms)
+//   displayBookings()
+//   displayAmountSpent()
+// };
 
 export default resolvePromises;
