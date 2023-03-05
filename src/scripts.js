@@ -46,7 +46,7 @@ function resolvePromises() {
     .then((data) => {
       allCustomers = data[0].customers.map(
         (customer) => new Customer(customer)
-      );
+        );
       allRooms = data[1].rooms.map((room) => new Rooms(room));
       allBookings = data[2].bookings.map((booking) => booking);
     })
