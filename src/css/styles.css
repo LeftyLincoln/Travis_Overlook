@@ -26,11 +26,15 @@ h1, h2 {
   text-align: center;
 }
 
+h1 {
+  font-size: 40px;
+}
+
 .booking-section {
   padding-top: 10px;
   display:flex;
   flex-direction: column;
-  height: 90vh;
+  height: 70vh;
   align-content: flex-end;
   overflow: auto;
 
@@ -54,6 +58,11 @@ h1, h2 {
   padding:5px
 }
 
+.show-rooms-button, .filter-rooms-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .top-section {
   text-align: center;
 }
@@ -69,7 +78,7 @@ h1, h2 {
   padding-top: 10px;
   overflow: auto;
   flex-direction: column;
-  height: 90vh
+  height: 70vh
 }
 
 .rules > p {
@@ -111,6 +120,10 @@ aside {
   text-align: center;
 }
 
+.amount-spent-section {
+  padding-bottom: 40px;
+  font-size: 22px;
+  
 .hidden {
   display: none;
 }
