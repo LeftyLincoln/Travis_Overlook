@@ -1,28 +1,34 @@
 * {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 
 body {
-  display:flex;
-  width: 95vw; 
+  display: flex;
+  width: 95vw;
   height: 100vh;
-  background-image: url('https://media.istockphoto.com/id/1220321548/photo/hotel-atlantis-at-jumeirah-palm-in-dubai.jpg?s=612x612&w=0&k=20&c=YT9D8RU5-1RZs-pbw6nlOgongBAoCWAONz7iUQ26N10=');
+  background-image: url("https://media.istockphoto.com/id/1220321548/photo/hotel-atlantis-at-jumeirah-palm-in-dubai.jpg?s=612x612&w=0&k=20&c=YT9D8RU5-1RZs-pbw6nlOgongBAoCWAONz7iUQ26N10=");
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 
 aside {
-  width:20vw;
-  height: 100vh
+  width: 20vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
 }
 
 main {
-  width:80vw;
-  height:100vh;
+  width: 80vw;
+  height: 100vh;
 }
 
-h1, h2 {
+h1,
+h2,
+.top-section,
+.login-form {
   text-align: center;
 }
 
@@ -32,16 +38,15 @@ h1 {
 
 .booking-section {
   padding-top: 10px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   height: 70vh;
   align-content: flex-end;
   overflow: auto;
-
 }
 
 .booking-card {
-  display:flex;
+  display: flex;
   align-items: flex-end;
   flex-direction: row;
   border: 2px solid black;
@@ -50,21 +55,14 @@ h1 {
   background-color: grey;
 }
 
-.hidden {
-  display: none;
-}
-
 .room-id {
-  padding:5px
+  padding: 5px;
 }
 
-.show-rooms-button, .filter-rooms-button {
+.show-rooms-button,
+.filter-rooms-button {
   margin-top: 20px;
   margin-bottom: 20px;
-}
-
-.top-section {
-  text-align: center;
 }
 
 .bottom-section {
@@ -78,7 +76,7 @@ h1 {
   padding-top: 10px;
   overflow: auto;
   flex-direction: column;
-  height: 70vh
+  height: 70vh;
 }
 
 .rules > p {
@@ -88,23 +86,20 @@ h1 {
 .room-card {
   border: 2px solid black;
   border-radius: 8px;
-  display:flex;
+  display: flex;
   background-color: grey;
   margin: 3px;
 }
 
-button, input, select {
+button,
+input,
+select {
   cursor: pointer;
 }
 
-aside {
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 10px;
-}
-
-.button-booking:hover, .show-rooms-button:hover, .filter-rooms-button:hover {
+.button-booking:hover,
+.show-rooms-button:hover,
+.filter-rooms-button:hover {
   scale: 1.1;
   background-color: grey;
   border-radius: 8px;
@@ -116,14 +111,11 @@ aside {
   align-items: center;
 }
 
-.login-form {
-  text-align: center;
-}
-
 .amount-spent-section {
   padding-bottom: 40px;
   font-size: 22px;
-  
+}
+
 .hidden {
   display: none;
 }
