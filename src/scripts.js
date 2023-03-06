@@ -51,7 +51,6 @@ filterRoomBtn.addEventListener("click", filterRooms);
 
 showAvailableSection.addEventListener("click", (e) => {
   submitABooking(e)
-  updateCustomerData()
 });
 
 logInForm.addEventListener('submit', (e) => {
@@ -140,6 +139,7 @@ function filterRooms() {
 }
 
 function submitABooking(e) {
+  console.log('Firing')
   if (e.target.tagName === "BUTTON") {
     const roomNumber = Number(e.target.id);
     postRequest({
@@ -174,7 +174,6 @@ if(userName && passWord) {
 
 const getCustomerData = () => {
   const userID = parseInt(usernameField.value.split('customer')[1])
-  // const userID = Number(usernameField.value.slice(-2));
   fetchRequest(`customers/${userID}`)
   .then(data => {
     customer = new Customer(data)
@@ -192,12 +191,4 @@ const showDashboard = () => {
   bottomSection.classList.remove("hidden");
 };
 
-const updateCustomerData = () => {
-  customer.showBookings(allBookings)
-  customer.showAmountSpent(allRooms)
-  displayAmountSpent()
-  displayBookings(customer.bookings)
-  console.log(customer.bookings)
-}
-
-export default resolvePromises;
+export { resolvePromises, getCustomerData };
