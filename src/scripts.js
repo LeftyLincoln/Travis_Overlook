@@ -1,18 +1,14 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
-// An example of how you tell webpack to use a CSS (SCSS) file
 import "./css/styles.css";
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import "./images/turing-logo.png";
-
 import Customer from "./classes/Customer";
 import Rooms from "./classes/Rooms";
 import Hotel from "./classes/Hotel";
-import { fetchPromises, postRequest } from "./apiCalls";
+import { fetchPromises, fetchRequest, postRequest } from "./apiCalls";
 
 // Query Selectors
+
 const bookingSection = document.querySelector(".booking-section");
 const amountSpentSection = document.querySelector(".amount-spent-section");
 const showAvailableRooms = document.querySelector(".show-rooms-button");
@@ -20,8 +16,17 @@ const showAvailableSection = document.querySelector(".available-section");
 const dateChosen = document.getElementById("date");
 const filterRoomSection = document.getElementById("type-of-room");
 const filterRoomBtn = document.querySelector(".filter-rooms-button");
+const logInForm = document.querySelector(".login-form");
+const signInPage = document.querySelector(".sign-in-page");
+const asideSection = document.querySelector(".aside");
+const topSection = document.querySelector(".top-section");
+const bottomSection = document.querySelector(".bottom-section");
+const usernameField = document.getElementById("userInput");
+const passwordField = document.getElementById("passwordInput");
+const errorMessage = document.querySelector(".error-message");
 
 // Global Variables
+
 let allCustomers;
 let allRooms;
 let allBookings;
@@ -37,7 +42,15 @@ window.addEventListener("load", () => {
 
 showAvailableRooms.addEventListener("click", showRooms);
 filterRoomBtn.addEventListener("click", filterRooms);
-showAvailableSection.addEventListener("click", submitABooking);
+
+showAvailableSection.addEventListener("click", (e) => {
+  submitABooking(e);
+});
+
+logInForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  authenticateLogin();
+});
 
 // Functions
 
@@ -52,11 +65,6 @@ function resolvePromises() {
     })
     .then(() => {
       hotelRepo = new Hotel(allBookings, allRooms);
-      setCustomer(allCustomers);
-      customer.showBookings(allBookings);
-      displayBookings(customer.bookings);
-      customer.showAmountSpent(allRooms);
-      displayAmountSpent();
       dateChosen.setAttribute("value", new Date().toISOString().split("T")[0]);
       datePicked = dateChosen.value.replaceAll("-", "/");
       showRooms();
@@ -64,7 +72,6 @@ function resolvePromises() {
 }
 
 function displayBookings(customerBookings) {
-  console.log(customerBookings);
   bookingSection.innerHTML = "Your reservations:";
   customerBookings.forEach((booking) => {
     bookingSection.innerHTML += `
@@ -77,20 +84,9 @@ function displayBookings(customerBookings) {
 }
 
 function displayAmountSpent() {
-  amountSpentSection.innerHTML = `Welcome ${
-    customer.name
-  }! You have spent $${customer
+  amountSpentSection.innerHTML = `Welcome ${customer.name}! You have spent $${customer
     .showAmountSpent(allRooms)
     .toFixed(2)} at the Atlantis`;
-}
-
-function setCustomer(arr) {
-  customer = arr[3];
-
-  //loggedInUser = id from login number - 1
-
-  // let randomCustomerIndex = arr[Math.floor(Math.random() * arr.length)];
-  // randomCustomer = new Customer(randomCustomerIndex);
 }
 
 function showRooms() {
@@ -139,6 +135,7 @@ function filterRooms() {
 }
 
 function submitABooking(e) {
+  console.log("Firing");
   if (e.target.tagName === "BUTTON") {
     const roomNumber = Number(e.target.id);
     postRequest({
@@ -149,4 +146,43 @@ function submitABooking(e) {
   }
 }
 
-export default resolvePromises;
+const authenticateLogin = () => {
+  const userName = usernameField.value;
+  const passWord = passwordField.value;
+
+  if (userName && passWord) {
+    if (!userName.includes("customer")) {
+      errorMessage.innerText = "No customer found with that name";
+    } else if (passWord !== "overlook2021") {
+      errorMessage.innerText = "Incorrect password! Perhaps try again";
+    } else {
+      const userID = parseInt(usernameField.value.split("customer")[1]);
+      if (userID < 1 || userID > 50) {
+        errorMessage.innerText = "No user found with that name";
+      } else {
+        getCustomerData();
+        showDashboard();
+      }
+    }
+  }
+};
+
+const getCustomerData = () => {
+  const userID = parseInt(usernameField.value.split("customer")[1]);
+  fetchRequest(`customers/${userID}`).then((data) => {
+    customer = new Customer(data);
+    customer.showBookings(allBookings);
+    customer.showAmountSpent(allRooms);
+    displayBookings(customer.bookings);
+    displayAmountSpent();
+  });
+};
+
+const showDashboard = () => {
+  signInPage.classList.add("hidden");
+  asideSection.classList.remove("hidden");
+  topSection.classList.remove("hidden");
+  bottomSection.classList.remove("hidden");
+};
+
+export { resolvePromises, getCustomerData };
