@@ -51,8 +51,6 @@ filterRoomBtn.addEventListener("click", filterRooms);
 
 showAvailableSection.addEventListener("click", (e) => {
   submitABooking(e)
-  getCustomerData()
-  
 });
 
 logInForm.addEventListener('submit', (e) => {
@@ -141,6 +139,7 @@ function filterRooms() {
 }
 
 function submitABooking(e) {
+  console.log('Firing')
   if (e.target.tagName === "BUTTON") {
     const roomNumber = Number(e.target.id);
     postRequest({
@@ -192,5 +191,4 @@ const showDashboard = () => {
   bottomSection.classList.remove("hidden");
 };
 
-
-export default resolvePromises;
+export { resolvePromises, getCustomerData };

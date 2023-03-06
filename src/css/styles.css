@@ -30,7 +30,7 @@ h1, h2 {
   padding-top: 10px;
   display:flex;
   flex-direction: column;
-  height: 95vh;
+  height: 90vh;
   align-content: flex-end;
   overflow: auto;
 
@@ -69,7 +69,7 @@ h1, h2 {
   padding-top: 10px;
   overflow: auto;
   flex-direction: column;
-  height: 100vh
+  height: 90vh
 }
 
 .rules > p {
