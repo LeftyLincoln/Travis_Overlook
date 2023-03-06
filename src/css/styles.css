@@ -32,6 +32,8 @@ h1, h2 {
   flex-direction: column;
   height: 95vh;
   align-content: flex-end;
+  overflow: auto;
+
 }
 
 .booking-card {
@@ -59,10 +61,15 @@ h1, h2 {
 .bottom-section {
   display: flex;
   justify-content: space-between;
+  overflow: auto;
 }
 
 .available-section {
+  display: flex;
   padding-top: 10px;
+  overflow: auto;
+  flex-direction: column;
+  height: 100vh
 }
 
 .rules > p {
