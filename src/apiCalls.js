@@ -1,4 +1,4 @@
-import resolvePromises from "./scripts";
+import { getCustomerData , resolvePromises } from "./scripts";
 
 
 function fetchRequest(type) {
@@ -26,6 +26,7 @@ function postRequest(booking) {
       throw new Error(response.status)
     } else {
       resolvePromises()
+      getCustomerData()
     }
   })
   .catch(error => console.log(`Issue at: ${error}`));
@@ -39,5 +40,5 @@ function fetchPromises() {
   return Promise.all([allCustomers, allRooms, allBookings]);
 };
 
-export { fetchPromises, postRequest };
+export { fetchPromises, fetchRequest, postRequest };
 

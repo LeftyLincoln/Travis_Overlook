@@ -120,13 +120,10 @@ aside {
   text-align: center;
 }
 
-
-
-.hidden {
-  display: none;
-}
-
 .amount-spent-section {
   padding-bottom: 40px;
   font-size: 22px;
+  
+.hidden {
+  display: none;
 }
