@@ -14,6 +14,10 @@ describe("Customer", () => {
   });
 
   it("should be a function", () => {
+    expect(Customer).to.be.a('function');
+  });
+
+  it("should be an instance of customer", () => {
     expect(customer1).to.be.instanceOf(Customer);
   });
 

@@ -11,7 +11,11 @@ describe("Rooms", () => {
     room2 = new Rooms(testRooms[1]);
   });
 
-  it("should be a function", () => {
+  it('should be a function', () => {
+    expect(Rooms).to.be.a('function');
+  });
+
+  it('should be an instance of rooms', () => {
     expect(room1).to.be.instanceOf(Rooms);
   });
 

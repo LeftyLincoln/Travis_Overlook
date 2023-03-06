@@ -12,6 +12,10 @@ describe("Hotel", () => {
   });
 
   it("should be a function", () => {
+    expect(Hotel).to.be.a("function");
+  });
+
+  it("should be an instance of hotel", () => {
     expect(testHotel).to.be.instanceOf(Hotel);
   });
 
