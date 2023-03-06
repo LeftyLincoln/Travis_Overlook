@@ -1,13 +1,7 @@
-
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
-// An example of how you tell webpack to use a CSS (SCSS) file
 import "./css/styles.css";
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import "./images/turing-logo.png";
-
 import Customer from "./classes/Customer";
 import Rooms from "./classes/Rooms";
 import Hotel from "./classes/Hotel";
@@ -29,7 +23,7 @@ const topSection = document.querySelector(".top-section");
 const bottomSection = document.querySelector(".bottom-section");
 const usernameField = document.getElementById("userInput");
 const passwordField = document.getElementById("passwordInput");
-const errorMessage = document.querySelector('.error-message')
+const errorMessage = document.querySelector(".error-message");
 
 // Global Variables
 
@@ -50,20 +44,22 @@ showAvailableRooms.addEventListener("click", showRooms);
 filterRoomBtn.addEventListener("click", filterRooms);
 
 showAvailableSection.addEventListener("click", (e) => {
-  submitABooking(e)
+  submitABooking(e);
 });
 
-logInForm.addEventListener('submit', (e) => {
-  e.preventDefault()
-  authenticateLogin()
-})
+logInForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  authenticateLogin();
+});
 
 // Functions
 
 function resolvePromises() {
   fetchPromises()
     .then((data) => {
-      allCustomers = data[0].customers.map((customer) => new Customer(customer));
+      allCustomers = data[0].customers.map(
+        (customer) => new Customer(customer)
+      );
       allRooms = data[1].rooms.map((room) => new Rooms(room));
       allBookings = data[2].bookings.map((booking) => booking);
     })
@@ -71,7 +67,7 @@ function resolvePromises() {
       hotelRepo = new Hotel(allBookings, allRooms);
       dateChosen.setAttribute("value", new Date().toISOString().split("T")[0]);
       datePicked = dateChosen.value.replaceAll("-", "/");
-      showRooms()
+      showRooms();
     });
 }
 
@@ -139,7 +135,7 @@ function filterRooms() {
 }
 
 function submitABooking(e) {
-  console.log('Firing')
+  console.log("Firing");
   if (e.target.tagName === "BUTTON") {
     const roomNumber = Number(e.target.id);
     postRequest({
@@ -151,37 +147,35 @@ function submitABooking(e) {
 }
 
 const authenticateLogin = () => {
+  const userName = usernameField.value;
+  const passWord = passwordField.value;
 
-const userName = usernameField.value
-const passWord = passwordField.value
-
-if(userName && passWord) {
-  if(!userName.includes('customer')) {
-    errorMessage.innerText = "No customer found with that name"
-  } else if (passWord !== 'overlook2021') {
-    errorMessage.innerText = "Incorrect password! Perhaps try again"
-  } else {
-    const userID = parseInt(usernameField.value.split('customer')[1])
-    if(userID < 1 || userID > 50) {
-      errorMessage.innerText = 'No user found with that name'
+  if (userName && passWord) {
+    if (!userName.includes("customer")) {
+      errorMessage.innerText = "No customer found with that name";
+    } else if (passWord !== "overlook2021") {
+      errorMessage.innerText = "Incorrect password! Perhaps try again";
     } else {
-        getCustomerData()
-        showDashboard()
+      const userID = parseInt(usernameField.value.split("customer")[1]);
+      if (userID < 1 || userID > 50) {
+        errorMessage.innerText = "No user found with that name";
+      } else {
+        getCustomerData();
+        showDashboard();
+      }
     }
-  }
   }
 };
 
 const getCustomerData = () => {
-  const userID = parseInt(usernameField.value.split('customer')[1])
-  fetchRequest(`customers/${userID}`)
-  .then(data => {
-    customer = new Customer(data)
-    customer.showBookings(allBookings)
-    customer.showAmountSpent(allRooms)
-    displayBookings(customer.bookings)
-    displayAmountSpent()
-  })
+  const userID = parseInt(usernameField.value.split("customer")[1]);
+  fetchRequest(`customers/${userID}`).then((data) => {
+    customer = new Customer(data);
+    customer.showBookings(allBookings);
+    customer.showAmountSpent(allRooms);
+    displayBookings(customer.bookings);
+    displayAmountSpent();
+  });
 };
 
 const showDashboard = () => {
