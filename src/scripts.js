@@ -75,7 +75,7 @@ function displayBookings(customerBookings) {
   bookingSection.innerHTML = "Your reservations:";
   customerBookings.forEach((booking) => {
     bookingSection.innerHTML += `
-      <div class='booking-card'>
+      <div class='booking-card' tabIndex='0'>
         <p class='booking-id' id='${booking.date}'>On ${booking.date} you booked room ${booking.roomNumber}
         </p>
         </div>
