@@ -72,11 +72,14 @@ function resolvePromises() {
 }
 
 function displayBookings(customerBookings) {
+  let today = Date.now()
+  customer
+
   bookingSection.innerHTML = "Your reservations:";
   customerBookings.forEach((booking) => {
     bookingSection.innerHTML += `
       <div class='booking-card' tabIndex='0'>
-        <p class='booking-id' id='${booking.date}'>On ${booking.date} you booked room ${booking.roomNumber}
+        <p class='booking-id' id='${booking.date}'>You booked room ${booking.roomNumber} for ${booking.date} 
         </p>
         </div>
       `;
