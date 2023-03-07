@@ -72,11 +72,16 @@ function resolvePromises() {
 }
 
 function displayBookings(customerBookings) {
+  let reservations = customerBookings.filter(booking => {
+    return Date.parse(booking.date)
+  })
+  reservations.sort((a, b) => new Date(b.date) - new Date(a.date));
+
   bookingSection.innerHTML = "Your reservations:";
-  customerBookings.forEach((booking) => {
+  reservations.forEach((booking) => {
     bookingSection.innerHTML += `
       <div class='booking-card' tabIndex='0'>
-        <p class='booking-id' id='${booking.date}'>On ${booking.date} you booked room ${booking.roomNumber}
+        <p class='booking-id' id='${booking.date}'>You booked room ${booking.roomNumber} for ${booking.date} 
         </p>
         </div>
       `;
