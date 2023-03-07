@@ -9,7 +9,8 @@ import { fetchPromises, fetchRequest, postRequest } from "./apiCalls";
 
 // Query Selectors
 
-const bookingSection = document.querySelector(".booking-section");
+const futureBookingSection = document.querySelector(".future-booking-section");
+const pastBookingSection = document.querySelector(".past-booking-section");
 const amountSpentSection = document.querySelector(".amount-spent-section");
 const showAvailableRooms = document.querySelector(".show-rooms-button");
 const showAvailableSection = document.querySelector(".available-section");
@@ -72,15 +73,37 @@ function resolvePromises() {
 }
 
 function displayBookings(customerBookings) {
-  bookingSection.innerHTML = "Your reservations:";
-  customerBookings.forEach((booking) => {
-    bookingSection.innerHTML += `
+  let today = Date.now()
+
+  let futureReservations = customerBookings.filter(booking => {
+    return Date.parse(booking.date) > today
+  })
+  let pastReservations = customerBookings.filter(booking => {
+    return Date.parse(booking.date) < today
+  })
+
+  futureReservations.sort((a, b) => new Date(b.date) - new Date(a.date));
+  pastReservations.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  futureBookingSection.innerHTML = "Your Future Reservations:";
+  futureReservations.forEach((booking) => {
+    futureBookingSection.innerHTML += `
+      <div class='booking-card' tabIndex='0'>
+        <p class='booking-id' id='${booking.date}'>You booked room ${booking.roomNumber} for ${booking.date}
+        </p>
+        </div>
+      `;
+  });
+
+  pastBookingSection.innerHTML = "Your Past Reservations:";
+  pastReservations.forEach((booking) => {
+    pastBookingSection.innerHTML += `
       <div class='booking-card' tabIndex='0'>
         <p class='booking-id' id='${booking.date}'>On ${booking.date} you booked room ${booking.roomNumber}
         </p>
         </div>
       `;
-  });
+})
 }
 
 function displayAmountSpent() {
@@ -135,7 +158,6 @@ function filterRooms() {
 }
 
 function submitABooking(e) {
-  console.log("Firing");
   if (e.target.tagName === "BUTTON") {
     const roomNumber = Number(e.target.id);
     postRequest({

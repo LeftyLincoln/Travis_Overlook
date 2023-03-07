@@ -116,6 +116,14 @@ select {
   font-size: 22px;
 }
 
+.past-booking-section, .future-booking-section {
+  display:flex;
+  overflow: auto;
+  flex-direction: column;
+  height: 70vh;
+  padding-left: 10px;
+}
+
 .hidden {
   display: none;
 }
