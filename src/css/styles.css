@@ -124,6 +124,11 @@ select {
   padding-left: 10px;
 }
 
+.user-booking-message {
+  font-size: 22px;
+  font-weight: bolder;
+}
+
 .hidden {
   display: none;
 }

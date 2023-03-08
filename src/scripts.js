@@ -25,6 +25,7 @@ const bottomSection = document.querySelector(".bottom-section");
 const usernameField = document.getElementById("userInput");
 const passwordField = document.getElementById("passwordInput");
 const errorMessage = document.querySelector(".error-message");
+const userBookingMessage = document.querySelector(".user-booking-message")
 
 // Global Variables
 
@@ -69,7 +70,7 @@ function resolvePromises() {
       dateChosen.setAttribute("value", new Date().toISOString().split("T")[0]);
       datePicked = dateChosen.value.replaceAll("-", "/");
       showRooms();
-    });
+    })
 }
 
 function displayBookings(customerBookings) {
@@ -207,4 +208,12 @@ const showDashboard = () => {
   bottomSection.classList.remove("hidden");
 };
 
-export { resolvePromises, getCustomerData };
+const showMessage = () => {
+  userBookingMessage.innerText = "Congrats on booking a room, we can't wait to see you!"
+  setTimeout(clearText, 2000)
+  function clearText() {
+    userBookingMessage.innerText = ""
+  }
+}
+
+export { resolvePromises, getCustomerData, showMessage };

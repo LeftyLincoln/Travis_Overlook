@@ -1,4 +1,4 @@
-import { getCustomerData, resolvePromises } from "./scripts";
+import { getCustomerData, resolvePromises, showMessage} from "./scripts";
 
 function fetchRequest(type) {
   return fetch(`http://localhost:3001/api/v1/${type}`)
@@ -26,6 +26,7 @@ function postRequest(booking) {
       } else {
         resolvePromises();
         getCustomerData();
+        showMessage();
       }
     })
     .catch((error) => console.log(`Issue at: ${error}`));
