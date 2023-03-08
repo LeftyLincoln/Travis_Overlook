@@ -26,7 +26,6 @@ const usernameField = document.getElementById("userInput");
 const passwordField = document.getElementById("passwordInput");
 const errorMessage = document.querySelector(".error-message");
 const userBookingMessage = document.querySelector(".user-booking-message")
-
 // Global Variables
 
 let allCustomers;
@@ -216,4 +215,8 @@ const showMessage = () => {
   }
 }
 
-export { resolvePromises, getCustomerData, showMessage };
+const showUserErrorMessage = () => {
+  errorMessage.innerText = "Sorry there seems to be an issue with the server, please come back another time."
+}
+
+export { resolvePromises, getCustomerData, showMessage, showUserErrorMessage };
