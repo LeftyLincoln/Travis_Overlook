@@ -1,4 +1,4 @@
-import { getCustomerData, resolvePromises } from "./scripts";
+import { getCustomerData, resolvePromises, showMessage, showUserErrorMessage} from "./scripts";
 
 function fetchRequest(type) {
   return fetch(`http://localhost:3001/api/v1/${type}`)
@@ -9,7 +9,7 @@ function fetchRequest(type) {
         throw new Error("Error");
       }
     })
-    .catch((error) => console.log(`Issue at: ${error}`));
+    .catch(showUserErrorMessage());
 }
 
 function postRequest(booking) {
@@ -26,9 +26,10 @@ function postRequest(booking) {
       } else {
         resolvePromises();
         getCustomerData();
+        showMessage();
       }
     })
-    .catch((error) => console.log(`Issue at: ${error}`));
+    .catch(showUserErrorMessage());
 }
 
 function fetchPromises() {
