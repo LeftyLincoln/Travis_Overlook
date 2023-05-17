@@ -1,5 +1,11 @@
 * {
   font-family: "Roboto Mono", monospace;
+  color:antiquewhite
+}
+
+main {
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -9,6 +15,8 @@ body {
   background-image: url("https://media.istockphoto.com/id/1220321548/photo/hotel-atlantis-at-jumeirah-palm-in-dubai.jpg?s=612x612&w=0&k=20&c=YT9D8RU5-1RZs-pbw6nlOgongBAoCWAONz7iUQ26N10=");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  min-height: 100vh;
 }
 
 aside {
@@ -32,8 +40,9 @@ h2,
   text-align: center;
 }
 
-h1 {
+h1, h2 {
   font-size: 40px;
+  color: black
 }
 
 .booking-section {
@@ -69,6 +78,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   overflow: auto;
+
 }
 
 .available-section {
@@ -77,6 +87,10 @@ h1 {
   overflow: auto;
   flex-direction: column;
   height: 70vh;
+}
+
+label {
+  color: black
 }
 
 .rules > p {
@@ -96,6 +110,7 @@ input,
 select {
   cursor: pointer;
   border-radius:6px;
+  color: black
 }
 
 .button-booking:hover,
@@ -115,6 +130,7 @@ select {
 .amount-spent-section {
   padding-bottom: 40px;
   font-size: 22px;
+  color: black
 }
 
 .past-booking-section, .future-booking-section {
@@ -133,7 +149,7 @@ select {
 .example-login {
   display:flex;
   flex-direction: row;
-  margin-top: 300px;
+  margin-top: 175px;
   color: white;
   
 }
@@ -148,6 +164,9 @@ h3 {
 .hidden {
   display: none;
 }
+.submit {
+  margin: 5px
+}
 
 .submit:hover {
   scale: 1.1;
@@ -156,4 +175,72 @@ h3 {
 
 .login-input:hover {
   background-color: antiquewhite;
+}
+
+.input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+  padding: 10px
+}
+
+.login-input {
+  margin: 5px
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 850px) {
+  h1 {
+    font-size: 30px;
+  }
+}
+
+
+@media screen and (max-width: 750px) {
+h1 {
+  font-size: 20px;
+}
+
+
+h2 {
+  font-size: 20px;
+}
+
+.input {
+  flex-direction: column;
+  width:50vw
+}
+
+.example-login {
+  flex-direction: column;
+}
+
+aside {
+  justify-content: flex-start;
+  height: 30%
+}
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  background-image: url("https://media.istockphoto.com/id/1220321548/photo/hotel-atlantis-at-jumeirah-palm-in-dubai.jpg?s=612x612&w=0&k=20&c=YT9D8RU5-1RZs-pbw6nlOgongBAoCWAONz7iUQ26N10=");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100%;
+}
+
+.title-booking, .amount-spent-section {
+  color:antiquewhite
+}
+
 }
