@@ -42,7 +42,8 @@ h2,
 
 h1, h2 {
   font-size: 40px;
-  color: black
+  color: black;
+  margin: 5px
 }
 
 .booking-section {
@@ -52,6 +53,13 @@ h1, h2 {
   height: 70vh;
   align-content: flex-end;
   overflow: auto;
+}
+
+.error-message {
+  color:black;
+  border:none;
+  size: 30px;
+  margin: 0px
 }
 
 .booking-card {
@@ -78,8 +86,8 @@ h1, h2 {
   display: flex;
   justify-content: space-between;
   overflow: auto;
-
 }
+
 
 .available-section {
   display: flex;
@@ -90,7 +98,7 @@ h1, h2 {
 }
 
 label {
-  color: black
+  color: black;
 }
 
 .rules > p {
@@ -110,7 +118,7 @@ input,
 select {
   cursor: pointer;
   border-radius:6px;
-  color: black
+  color: black;  
 }
 
 .button-booking:hover,
@@ -148,10 +156,9 @@ select {
 
 .example-login {
   display:flex;
-  flex-direction: row;
-  margin-top: 175px;
+  flex-direction: column;
+  margin-top: 255px;
   color: white;
-  
 }
 
 h3 {
@@ -159,6 +166,10 @@ h3 {
   border: 3px solid white;
   margin-left: 10px;
   border-radius: 9px;
+}
+
+.show-rooms-button {
+  margin:5px
 }
 
 .hidden {
@@ -201,12 +212,10 @@ h3 {
   }
 }
 
-
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 800px) {
 h1 {
   font-size: 20px;
 }
-
 
 h2 {
   font-size: 20px;
@@ -217,15 +226,10 @@ h2 {
   width:50vw
 }
 
-.example-login {
-  flex-direction: column;
-}
-
 aside {
   justify-content: flex-start;
   height: 30%
 }
-
 
 body {
   display: flex;
@@ -243,4 +247,7 @@ body {
   color:antiquewhite
 }
 
+.example-login {
+  margin-top: 200px;
+}
 }
