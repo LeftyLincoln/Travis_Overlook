@@ -13,7 +13,7 @@
   <body>
     <aside class="aside hidden">
       <h2>Pick Your Day to Stay</h2>
-      <label for="date">Choose Date:</label>
+      <label class="label" for="date">Choose Date:</label>
       <input
         type="date"
         label="calendar"
@@ -39,21 +39,23 @@
             🌊 Welcome to the Atlantis 🌊 <br />
             Please Log In
           </h1>
-          <input
+          <div class="input">
+            <input
             class="login-input"
             type="userName"
             id="userInput"
             placeholder=" username"
             required
-          />
-          <input
+            />
+            <input
             class="login-input"
             type="password"
             id="passwordInput"
             placeholder=" password"
             required
-          />
-          <button class="submit" type="submit">Submit</button>
+            />
+            <button class="submit" type="submit">Submit</button>
+          </div>
           <p class="error-message"></p>
           <div class="example-login">
             <h3>Log In:</h3>
