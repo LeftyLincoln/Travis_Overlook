@@ -95,6 +95,7 @@ button,
 input,
 select {
   cursor: pointer;
+  border-radius:6px;
 }
 
 .button-booking:hover,
@@ -129,6 +130,30 @@ select {
   font-weight: bolder;
 }
 
+.example-login {
+  display:flex;
+  flex-direction: row;
+  margin-top: 300px;
+  color: white;
+  
+}
+
+h3 {
+  margin:5px;
+  border: 3px solid white;
+  margin-left: 10px;
+  border-radius: 9px;
+}
+
 .hidden {
   display: none;
+}
+
+.submit:hover {
+  scale: 1.1;
+  background-color: antiquewhite;
+}
+
+.login-input:hover {
+  background-color: antiquewhite;
 }
