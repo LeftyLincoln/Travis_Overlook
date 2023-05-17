@@ -1,7 +1,7 @@
 import { getCustomerData, resolvePromises, showMessage, showUserErrorMessage} from "./scripts";
 
 function fetchRequest(type) {
-  return fetch(`http://localhost:3001/api/v1/${type}`)
+  return fetch(`https://overlook-api-jfogiato.vercel.app/api/v1/${type}`)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -9,11 +9,11 @@ function fetchRequest(type) {
         throw new Error("Error");
       }
     })
-    .catch(showUserErrorMessage());
+    .catch(() => console.log('error'));
 }
 
 function postRequest(booking) {
-  fetch("http://localhost:3001/api/v1/bookings", {
+  fetch("https://overlook-api-jfogiato.vercel.app/api/v1/bookings", {
     method: "POST",
     body: JSON.stringify(booking),
     headers: {
